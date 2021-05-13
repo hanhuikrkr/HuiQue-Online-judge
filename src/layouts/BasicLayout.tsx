@@ -175,7 +175,20 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
         {children}
       </Authorized>
     </ProLayout>
-    <SettingDrawer />
+    <SettingDrawer 
+      settings={settings}
+      hideCopyButton={true}
+      hideHintAlert={true}
+      
+      
+      onSettingChange={(config) =>
+        dispatch({
+          type: 'settings/changeSetting',
+          payload: config,
+        })
+
+      }
+      />
     </>
   );
 };

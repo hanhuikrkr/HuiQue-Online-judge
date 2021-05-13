@@ -1,0 +1,18 @@
+{
+    "theme": [
+    {
+      "theme": "dark",
+      "fileName": "dark.css"
+    }
+    
+  ],
+    "min": true,
+  
+    "isModule": true,
+    
+    "ignoreAntd": false,
+ 
+    "ignoreProLayout": false,
+  
+    "cache": true
+  }
