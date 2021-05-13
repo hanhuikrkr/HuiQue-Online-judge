@@ -8,7 +8,7 @@ import type {
   BasicLayoutProps as ProLayoutProps,
   Settings,
 } from '@ant-design/pro-layout';
-import ProLayout, { DefaultFooter } from '@ant-design/pro-layout';
+import ProLayout, { DefaultFooter,SettingDrawer } from '@ant-design/pro-layout';
 import React, { useEffect, useMemo, useRef } from 'react';
 import type { Dispatch } from 'umi';
 import { Link, useIntl, connect, history } from 'umi';
@@ -121,6 +121,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
   const { formatMessage } = useIntl();
 
   return (
+    <>
     <ProLayout
       logo={logo}
       formatMessage={formatMessage}
@@ -174,6 +175,8 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
         {children}
       </Authorized>
     </ProLayout>
+    <SettingDrawer />
+    </>
   );
 };
 
