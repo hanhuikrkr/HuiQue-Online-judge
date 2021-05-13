@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-05-13 17:28:24
+ * @LastEditTime: 2021-05-13 18:13:01
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \HuiQue-Online-judge\config\defaultSettings.ts
+ */
 import { Settings as ProSettings } from '@ant-design/pro-layout';
 
 type DefaultSettings = Partial<ProSettings> & {
@@ -6,8 +14,8 @@ type DefaultSettings = Partial<ProSettings> & {
 
 const proSettings: DefaultSettings = {
   navTheme: 'light',
-  // 拂晓蓝
-  primaryColor: '#91B493',
+
+  primaryColor: '#58B2DC',
   layout: 'top',
   contentWidth: 'Fluid',
   fixedHeader: false,
@@ -17,10 +25,10 @@ const proSettings: DefaultSettings = {
   pwa: false,
   iconfontUrl: '',
   menu: {
-    locale: true
+    locale: true,
   },
   headerHeight: 70,
-  splitMenus: false
+  splitMenus: false,
 };
 
 export type { DefaultSettings };

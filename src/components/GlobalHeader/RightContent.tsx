@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-05-13 17:28:24
+ * @LastEditTime: 2021-05-13 18:36:56
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \HuiQue-Online-judge\src\components\GlobalHeader\RightContent.tsx
+ */
 import { Tooltip, Tag } from 'antd';
 import type { Settings as ProSettings } from '@ant-design/pro-layout';
 import { QuestionCircleOutlined } from '@ant-design/icons';
@@ -6,7 +14,7 @@ import type { ConnectProps } from 'umi';
 import { connect, SelectLang } from 'umi';
 import type { ConnectState } from '@/models/connect';
 import Avatar from './AvatarDropdown';
-import HeaderSearch from '../HeaderSearch';
+
 import styles from './index.less';
 
 export type GlobalHeaderRightProps = {
@@ -30,7 +38,6 @@ const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = (props) => {
 
   return (
     <div className={className}>
-      
       <Tooltip title="Use documentation">
         <a
           style={{
@@ -50,7 +57,7 @@ const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = (props) => {
           <Tag color={ENVTagColor[REACT_APP_ENV]}>{REACT_APP_ENV}</Tag>
         </span>
       )}
-     
+      <SelectLang className={styles.action} />
     </div>
   );
 };
