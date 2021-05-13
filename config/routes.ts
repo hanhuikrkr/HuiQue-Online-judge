@@ -1,4 +1,4 @@
-﻿export default [
+export default [
   {
     path: '/',
     component: '../layouts/BlankLayout',
@@ -54,6 +54,12 @@
                 icon: 'table',
                 path: '/list',
                 component: './TableList',
+              },
+              {
+                name: '工作台',
+                icon: 'smile',
+                path: '/dashboardworkplace',
+                component: './Workplace',
               },
               {
                 component: './404',

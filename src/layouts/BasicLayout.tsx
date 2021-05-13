@@ -179,7 +179,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
       settings={settings}
       hideCopyButton={true}
       hideHintAlert={true}
-      
+      hideColors={true}
       
       onSettingChange={(config) =>
         dispatch({
