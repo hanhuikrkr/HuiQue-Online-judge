@@ -1,0 +1,6 @@
+@server_url=https://ssacgn.online/queoj
+
+@json=Content-Type: application/json
+###
+put {{server_url}}/verify/email
+

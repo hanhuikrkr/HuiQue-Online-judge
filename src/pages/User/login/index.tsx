@@ -1,4 +1,4 @@
-import { LockOutlined, MailOutlined, MobileOutlined, UserOutlined } from '@ant-design/icons';
+import { LockOutlined, MailOutlined, BarcodeOutlined, UserOutlined } from '@ant-design/icons';
 import { Alert, message, Tabs } from 'antd';
 import React, { useState } from 'react';
 import ProForm, { ProFormCaptcha, ProFormCheckbox, ProFormText } from '@ant-design/pro-form';
@@ -73,7 +73,7 @@ const Login: React.FC<LoginProps> = (props) => {
             })}
           />
           <Tabs.TabPane
-            key="mobile"
+            key="email"
             tab={intl.formatMessage({
               id: 'pages.login.phoneLogin.tab',
               defaultMessage: 'Email login',
@@ -138,17 +138,17 @@ const Login: React.FC<LoginProps> = (props) => {
           </>
         )}
 
-        {status === 'error' && loginType === 'mobile' && !submitting && (
+        {status === 'error' && loginType === 'email' && !submitting && (
           <LoginMessage content="Verification code error" />
         )}
-        {type === 'mobile' && (
+        {type === 'email' && (
           <>
             <ProFormText
               fieldProps={{
                 size: 'large',
-                prefix: <MobileOutlined className={styles.prefixIcon} />,
+                prefix: <MailOutlined className={styles.prefixIcon} />,
               }}
-              name="mobile"
+              name="email"
               placeholder={intl.formatMessage({
                 id: 'pages.login.phoneNumber.placeholder',
                 defaultMessage: 'Phone number',
@@ -177,7 +177,7 @@ const Login: React.FC<LoginProps> = (props) => {
             <ProFormCaptcha
               fieldProps={{
                 size: 'large',
-                prefix: <MailOutlined className={styles.prefixIcon} />,
+                prefix: <BarcodeOutlined className={styles.prefixIcon} />,
               }}
               captchaProps={{
                 size: 'large',
@@ -210,8 +210,8 @@ const Login: React.FC<LoginProps> = (props) => {
                   ),
                 },
               ]}
-              onGetCaptcha={async (mobile) => {
-                const result = await getFakeCaptcha(mobile);
+              onGetCaptcha={async (email) => {
+                const result = await getFakeCaptcha(email);
                 if (result === false) {
                   return;
                 }

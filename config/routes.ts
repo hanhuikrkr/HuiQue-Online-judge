@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-05-13 17:28:24
+ * @LastEditTime: 2021-05-16 22:18:48
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \HuiQue-Online-judge\config\routes.ts
+ */
 export default [
   {
     path: '/',
@@ -25,7 +33,7 @@ export default [
             routes: [
               {
                 path: '/',
-                redirect: '/welcome',
+                redirect: '/list',
               },
               {
                 path: '/welcome',
@@ -56,10 +64,12 @@ export default [
                 component: './TableList',
               },
               {
-                name: '工作台',
-                icon: 'smile',
-                path: '/dashboardworkplace',
+                path: '/account/center',
                 component: './Workplace',
+              },
+              {
+                path: '/account/settings',
+                component: './AccountSettings',
               },
               {
                 component: './404',
