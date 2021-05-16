@@ -84,7 +84,7 @@ const Login: React.FC<LoginProps> = (props) => {
             key="mobile"
             tab={intl.formatMessage({
               id: 'pages.login.phoneLogin.tab',
-              defaultMessage: 'Mobile phone number login',
+              defaultMessage: 'Email login',
             })}
           />
         </Tabs>
