@@ -1,16 +1,27 @@
-# Ant Design Pro
+<!--
+ * @Author: your name
+ * @Date: 2021-05-13 17:28:24
+ * @LastEditTime: 2021-05-16 19:34:55
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \HuiQue-Online-judge\README.md
+-->
 
-This project is initialized with [Ant Design Pro](https://pro.ant.design). Follow is the quick guide for how to use.
+# HuiQue Online judge
+
+HuiQue-Online-judge front-end project Follow is the quick guide for how to use.
 
 ## Environment Prepare
 
 Install `node_modules`:
 
+make sure the version of node should > 15.0.1
+
 ```bash
 npm install
 ```
 
-or
+use yarn or tyarn for quicker experience or
 
 ```bash
 yarn
@@ -18,7 +29,7 @@ yarn
 
 ## Provided Scripts
 
-Ant Design Pro provides some useful script to help you quick start and build with web project, code style check and test.
+Project provides some useful script to help you quick start and build with web project, code style check and test.
 
 Scripts provided in `package.json`. It's safe to modify or add additional script:
 
@@ -52,6 +63,16 @@ npm run lint:fix
 npm test
 ```
 
-## More
+## Commit Prepare
 
-You can view full document on our [official website](https://pro.ant.design). And welcome any feedback in our [github](https://github.com/ant-design/ant-design-pro).
+```bash
+npm run precommit
+```
+
+## Api Document
+
+[Link here](https://ssacgn.online/queoj/swagger-ui.html)
+
+## Back-end Proj hub
+
+[Link here](https://github.com/j128919965/queoj2021.git)

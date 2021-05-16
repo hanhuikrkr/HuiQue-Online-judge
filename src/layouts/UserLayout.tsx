@@ -1,5 +1,14 @@
+/*
+ * @Author: your name
+ * @Date: 2021-05-13 17:28:24
+ * @LastEditTime: 2021-05-16 19:26:32
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \HuiQue-Online-judge\src\layouts\UserLayout.tsx
+ */
 import type { MenuDataItem } from '@ant-design/pro-layout';
-import { DefaultFooter, getMenuData, getPageTitle } from '@ant-design/pro-layout';
+import { getMenuData, getPageTitle, DefaultFooter } from '@ant-design/pro-layout';
+import { GithubOutlined } from '@ant-design/icons';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import type { ConnectProps } from 'umi';
 import { Link, SelectLang, useIntl, connect, FormattedMessage } from 'umi';
@@ -61,7 +70,34 @@ const UserLayout: React.FC<UserLayoutProps> = (props) => {
           </div>
           {children}
         </div>
-        <DefaultFooter />
+        <DefaultFooter
+          copyright={`${new Date().getFullYear()} Produced by HuiQue Technology Department`}
+          links={[
+            {
+              key: 'Ant Design Pro',
+              title: (
+                <>
+                  <GithubOutlined />
+                  {'\t'}Han Hui
+                </>
+              ),
+              href: 'https://github.com/hanhuikrkr/HuiQue-Online-judge',
+              blankTarget: true,
+            },
+
+            {
+              key: 'Ant Design',
+              title: (
+                <>
+                  <GithubOutlined />
+                  {'\t'}Li Que
+                </>
+              ),
+              href: 'https://github.com/j128919965/queoj2021.git',
+              blankTarget: true,
+            },
+          ]}
+        />
       </div>
     </HelmetProvider>
   );
