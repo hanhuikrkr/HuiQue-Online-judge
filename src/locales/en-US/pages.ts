@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-05-13 17:28:24
+ * @LastEditTime: 2021-05-14 10:19:23
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \HuiQue-Online-judge\src\locales\en-US\pages.ts
+ */
 export default {
   'pages.layouts.userLayout.title':
     'Ant Design is the most influential web design specification in Xihu district',
@@ -7,11 +15,11 @@ export default {
   'pages.login.username.required': 'Please input your username!',
   'pages.login.password.placeholder': 'Password: ant.design',
   'pages.login.password.required': 'Please input your password!',
-  'pages.login.phoneLogin.tab': 'Phone Login',
+  'pages.login.phoneLogin.tab': 'Email Login',
   'pages.login.phoneLogin.errorMessage': 'Verification Code Error',
-  'pages.login.phoneNumber.placeholder': 'Phone Number',
-  'pages.login.phoneNumber.required': 'Please input your phone number!',
-  'pages.login.phoneNumber.invalid': 'Phone number is invalid!',
+  'pages.login.phoneNumber.placeholder': 'Eamil Address',
+  'pages.login.phoneNumber.required': 'Please input your Eamil Address!',
+  'pages.login.phoneNumber.invalid': 'Eamil Address is invalid!',
   'pages.login.captcha.placeholder': 'Verification Code',
   'pages.login.captcha.required': 'Please input verification code!',
   'pages.login.phoneLogin.getVerificationCode': 'Get Code',

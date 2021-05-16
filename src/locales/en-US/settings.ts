@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-05-13 17:28:24
+ * @LastEditTime: 2021-05-14 10:23:37
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \HuiQue-Online-judge\src\locales\en-US\settings.ts
+ */
 export default {
   'app.settings.menuMap.basic': 'Basic Settings',
   'app.settings.menuMap.security': 'Security Settings',
@@ -18,16 +26,16 @@ export default {
   'app.settings.basic.geographic-message': 'Please input your geographic info!',
   'app.settings.basic.address': 'Street Address',
   'app.settings.basic.address-message': 'Please input your address!',
-  'app.settings.basic.phone': 'Phone Number',
-  'app.settings.basic.phone-message': 'Please input your phone!',
+  'app.settings.basic.phone': 'Eamil Address',
+  'app.settings.basic.phone-message': 'Please input your Eamil Address!',
   'app.settings.basic.update': 'Update Information',
   'app.settings.security.strong': 'Strong',
   'app.settings.security.medium': 'Medium',
   'app.settings.security.weak': 'Weak',
   'app.settings.security.password': 'Account Password',
   'app.settings.security.password-description': 'Current password strength',
-  'app.settings.security.phone': 'Security Phone',
-  'app.settings.security.phone-description': 'Bound phone',
+  'app.settings.security.phone': 'Security Eamil Address',
+  'app.settings.security.phone-description': 'Bound Email',
   'app.settings.security.question': 'Security Question',
   'app.settings.security.question-description':
     'The security question is not set, and the security policy can effectively protect the account security',

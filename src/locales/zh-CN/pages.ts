@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-05-13 17:28:24
+ * @LastEditTime: 2021-05-16 15:42:34
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \HuiQue-Online-judge\src\locales\zh-CN\pages.ts
+ */
 export default {
   'pages.layouts.userLayout.title': 'Ant Design 是西湖区最具影响力的 Web 设计规范',
   'pages.login.accountLogin.tab': '账户密码登录',
@@ -6,11 +14,11 @@ export default {
   'pages.login.username.required': '用户名是必填项！',
   'pages.login.password.placeholder': '密码: ant.design',
   'pages.login.password.required': '密码是必填项！',
-  'pages.login.phoneLogin.tab': '手机号登录',
+  'pages.login.phoneLogin.tab': '验证码登录',
   'pages.login.phoneLogin.errorMessage': '验证码错误',
-  'pages.login.phoneNumber.placeholder': '请输入手机号！',
-  'pages.login.phoneNumber.required': '手机号是必填项！',
-  'pages.login.phoneNumber.invalid': '不合法的手机号！',
+  'pages.login.phoneNumber.placeholder': '请输入邮箱地址！',
+  'pages.login.phoneNumber.required': '邮箱地址是必填项！',
+  'pages.login.phoneNumber.invalid': '不合法的邮箱地址！',
   'pages.login.captcha.placeholder': '请输入验证码！',
   'pages.login.captcha.required': '验证码是必填项！',
   'pages.login.phoneLogin.getVerificationCode': '获取验证码',

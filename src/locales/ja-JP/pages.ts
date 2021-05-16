@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-05-13 17:28:24
+ * @LastEditTime: 2021-05-16 15:29:59
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \HuiQue-Online-judge\src\locales\ja-JP\pages.ts
+ */
 export default {
   'pages.layouts.userLayout.title': 'Ant Designは、西湖区で最も影響力のあるWebデザイン仕様です。',
   'pages.login.accountLogin.tab': 'アカウントログイン',
@@ -7,11 +15,11 @@ export default {
   'pages.login.username.required': 'ユーザー名を入力してください！',
   'pages.login.password.placeholder': 'パスワード：ant.design',
   'pages.login.password.required': 'パスワードを入力してください！',
-  'pages.login.phoneLogin.tab': '電話ログイン',
+  'pages.login.phoneLogin.tab': 'メールログイン',
   'pages.login.phoneLogin.errorMessage': '検証コードエラー',
-  'pages.login.phoneNumber.placeholder': '電話番号',
-  'pages.login.phoneNumber.required': '電話番号を入力してください！',
-  'pages.login.phoneNumber.invalid': '電話番号が無効です！',
+  'pages.login.phoneNumber.placeholder': 'メールアドレス',
+  'pages.login.phoneNumber.required': 'メールアドレスを入力してください！',
+  'pages.login.phoneNumber.invalid': 'メールアドレスが無効です！',
   'pages.login.captcha.placeholder': '確認コード',
   'pages.login.captcha.required': '確認コードを入力してください！',
   'pages.login.phoneLogin.getVerificationCode': '確認コードを取得',
