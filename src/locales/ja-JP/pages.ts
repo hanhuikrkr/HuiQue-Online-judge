@@ -1,13 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2021-05-13 17:28:24
- * @LastEditTime: 2021-05-16 15:29:59
- * @LastEditors: your name
+ * @LastEditTime: 2021-05-20 22:09:20
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \HuiQue-Online-judge\src\locales\ja-JP\pages.ts
  */
 export default {
-  'pages.layouts.userLayout.title': 'Ant Designは、西湖区で最も影響力のあるWebデザイン仕様です。',
+  'pages.layouts.userLayout.title': '灰色 ノ カササギ、オンライン審査システム',
   'pages.login.accountLogin.tab': 'アカウントログイン',
   'pages.login.accountLogin.errorMessage':
     'ユーザー名/パスワードが正しくありません（admin/ant.design)',

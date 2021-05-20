@@ -5,7 +5,7 @@
   flex-direction: column;
   height: 100vh;
   overflow: auto;
-  background: @layout-body-background;
+  background: #00000000;
 }
 
 .lang {
@@ -25,10 +25,14 @@
 
 @media (min-width: @screen-md-min) {
   .container {
-    background-image: url('https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg');
-    background-repeat: no-repeat;
-    background-position: center 110px;
-    background-size: 100%;
+    // background-image: url('../assets/bg_kv.jpg') ;
+    // background-repeat: no-repeat;
+
+
+    // background-size: cover;
+
+    // background-size: 100%;
+    background-color: #00000000;
   }
 
   .content {
@@ -43,6 +47,11 @@
 .header {
   height: 44px;
   line-height: 44px;
+  background-image:url('../assets/bg_kv_txt.png');
+  background-repeat: no-repeat;
+  background-position: inherit;
+  background-size: cover;
+
   a {
     text-decoration: none;
   }
@@ -68,4 +77,16 @@
   margin-bottom: 40px;
   color: @text-color-secondary;
   font-size: @font-size-base;
+}
+.layout_footer_bar {
+  margin: 0 auto;
+  background-color: rgba(0, 0, 0, 0) !important;
+
+  & div {
+    background-color: rgba(0, 0, 0, 0) !important;
+
+    & span {
+      background-color: rgba(0, 0, 0, 0) !important;
+    }
+  }
 }

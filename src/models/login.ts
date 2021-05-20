@@ -39,6 +39,7 @@ const Model: LoginModelType = {
         type: 'changeLoginStatus',
         payload: response,
       });
+      console.log(response)
       // Login successfully
       if (response.status === 'ok') {
         const urlParams = new URL(window.location.href);

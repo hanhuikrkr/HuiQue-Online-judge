@@ -35,6 +35,7 @@ const Login: React.FC<LoginProps> = (props) => {
   const { status, type: loginType } = userLogin;
   const [type, setType] = useState<string>('account');
   const intl = useIntl();
+  const [form] = ProForm.useForm();
 
   const handleSubmit = (values: LoginParamsType) => {
     const { dispatch } = props;
@@ -46,6 +47,7 @@ const Login: React.FC<LoginProps> = (props) => {
   return (
     <div className={styles.main}>
       <ProForm
+        form={form}
         initialValues={{
           autoLogin: true,
         }}
@@ -211,6 +213,18 @@ const Login: React.FC<LoginProps> = (props) => {
                 },
               ]}
               onGetCaptcha={async (email) => {
+                if (!form.getFieldValue('email')) {
+                  message.error('please enter your email address');
+                  return;
+                }
+                console.log(form.getFieldValue('email'));
+                const m = form.getFieldsError(['email']);
+                console.log(m);
+                if (m[0].errors.length > 0) {
+                  message.error(m[0].errors[0]);
+                  return;
+                }
+                email= form.getFieldValue('email')
                 const result = await getFakeCaptcha(email);
                 if (result === false) {
                   return;

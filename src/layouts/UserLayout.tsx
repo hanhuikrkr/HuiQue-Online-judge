@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-05-13 17:28:24
- * @LastEditTime: 2021-05-16 19:26:32
+ * @LastEditTime: 2021-05-20 23:32:39
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \HuiQue-Online-judge\src\layouts\UserLayout.tsx
@@ -14,7 +14,7 @@ import type { ConnectProps } from 'umi';
 import { Link, SelectLang, useIntl, connect, FormattedMessage } from 'umi';
 import React from 'react';
 import type { ConnectState } from '@/models/connect';
-import logo from '../assets/logo.svg';
+import logo from '../assets/13logo.svg';
 import styles from './UserLayout.less';
 
 export type UserLayoutProps = {
@@ -58,7 +58,7 @@ const UserLayout: React.FC<UserLayoutProps> = (props) => {
             <div className={styles.header}>
               <Link to="/">
                 <img alt="logo" className={styles.logo} src={logo} />
-                <span className={styles.title}>Ant Design</span>
+
               </Link>
             </div>
             <div className={styles.desc}>
@@ -71,6 +71,7 @@ const UserLayout: React.FC<UserLayoutProps> = (props) => {
           {children}
         </div>
         <DefaultFooter
+          className={styles.layout_footer_bar}
           copyright={`${new Date().getFullYear()} Produced by HuiQue Technology Department`}
           links={[
             {
