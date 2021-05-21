@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-05-13 17:28:24
- * @LastEditTime: 2021-05-20 23:32:39
+ * @LastEditTime: 2021-05-21 15:56:35
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \HuiQue-Online-judge\src\layouts\UserLayout.tsx
@@ -14,7 +14,7 @@ import type { ConnectProps } from 'umi';
 import { Link, SelectLang, useIntl, connect, FormattedMessage } from 'umi';
 import React from 'react';
 import type { ConnectState } from '@/models/connect';
-import logo from '../assets/13logo.svg';
+import logo from '../assets/1_3logo_复制.svg';
 import styles from './UserLayout.less';
 
 export type UserLayoutProps = {

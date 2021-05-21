@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-13 17:28:24
- * @LastEditTime: 2021-05-16 19:34:55
+ * @LastEditTime: 2021-05-21 18:12:08
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \HuiQue-Online-judge\README.md
@@ -71,7 +71,7 @@ npm run precommit
 
 ## Api Document
 
-[Link here](https://ssacgn.online/queoj/swagger-ui.html)
+[Link here](https://ssacgn.online/hqoj/swagger-ui.html)
 
 ## Back-end Proj hub
 

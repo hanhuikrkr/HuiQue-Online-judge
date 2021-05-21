@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-05-13 17:28:24
- * @LastEditTime: 2021-05-16 22:14:17
+ * @LastEditTime: 2021-05-21 17:56:00
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \HuiQue-Online-judge\src\components\GlobalHeader\RightContent.tsx
@@ -14,7 +14,7 @@ import type { ConnectProps } from 'umi';
 import { connect, SelectLang } from 'umi';
 import type { ConnectState } from '@/models/connect';
 import Avatar from './AvatarDropdown';
-
+import MessageDropDown from './MessageDropDown';
 import styles from './index.less';
 
 export type GlobalHeaderRightProps = {
@@ -38,6 +38,7 @@ const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = (props) => {
 
   return (
     <div className={className}>
+      <MessageDropDown />
       <Tooltip title="Use documentation">
         <a
           style={{

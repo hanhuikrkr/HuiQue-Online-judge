@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-05-13 17:28:24
- * @LastEditTime: 2021-05-13 18:13:01
+ * @LastEditTime: 2021-05-21 16:35:11
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \HuiQue-Online-judge\config\defaultSettings.ts
@@ -21,7 +21,7 @@ const proSettings: DefaultSettings = {
   fixedHeader: false,
   fixSiderbar: true,
   colorWeak: false,
-  title: 'HuiQue Online Judge',
+  title: false,
   pwa: false,
   iconfontUrl: '',
   menu: {
