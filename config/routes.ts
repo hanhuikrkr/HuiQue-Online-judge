@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-05-16 22:27:37
+ * @LastEditTime: 2021-05-21 21:36:55
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \HuiQue-Online-judge\config\routes.ts
+ */
 export default [
   {
     path: '/',
@@ -21,7 +29,7 @@ export default [
           {
             path: '/',
             component: '../layouts/BasicLayout',
-            authority: ['admin', 'user'],
+            authority: ['GUEST','ADMIN', 'NORMAL'],
             routes: [
               {
                 path: '/',
@@ -49,9 +57,11 @@ export default [
               },
               {
                 name: 'list.table-list',
-                icon: 'table',
+                icon: 'code',
                 path: '/list',
                 component: './TableList',
+                authority: ['GUEST','ADMIN', 'USER'],
+
               },
               {
                 path: '/account/center',

@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-05-13 17:28:24
+ * @LastEditTime: 2021-05-21 18:20:10
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \HuiQue-Online-judge\src\locales\ja-JP\menu.ts
+ */
 export default {
   'menu.welcome': 'ようこそ',
   'menu.more-blocks': 'その他のブロック',
@@ -22,7 +30,7 @@ export default {
   'menu.form.step-form.result': 'ステップフォーム（完成）',
   'menu.form.advanced-form': '高度なフォーム',
   'menu.list': 'リスト',
-  'menu.list.table-list': '検索テーブル',
+  'menu.list.table-list': '問題バンク',
   'menu.list.basic-list': '基本リスト',
   'menu.list.card-list': 'カードリスト',
   'menu.list.search-list': '検索リスト',

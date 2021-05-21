@@ -39,9 +39,12 @@ const Model: LoginModelType = {
         type: 'changeLoginStatus',
         payload: response,
       });
-      console.log(response)
+      console.log("payload",payload);
       // Login successfully
       if (response.success === true) {
+        if(payload.autoLogin===true){
+          localStorage.setItem('huique_oj_autoLogin', JSON.stringify(payload));
+        }
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
         message.success('🎉 🎉 🎉  登录成功！');
@@ -81,7 +84,9 @@ const Model: LoginModelType = {
 
   reducers: {
     changeLoginStatus(state, { payload }) {
-      setAuthority(payload.currentAuthority);
+      console.log(payload.data.info.role)
+      console.log(state)
+      setAuthority(payload.data.info.role);
       return {
         ...state,
         status: payload.status,
