@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-05-16 22:27:37
+ * @LastEditTime: 2021-05-23 17:28:10
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \HuiQue-Online-judge\src\pages\AccountSettings\locales\en-US.ts
+ */
 export default {
   'accountsettings.menuMap.basic': 'Basic Settings',
   'accountsettings.menuMap.security': 'Security Settings',
@@ -58,4 +66,12 @@ export default {
     'The to-do list will be notified in the form of a letter from the station',
   'accountsettings.settings.open': 'Open',
   'accountsettings.settings.close': 'Close',
+  'accountsettings.basic.github':'Github地址',
+  'accountsettings.basic.github-message':'请输入正确的Github地址',
+  'accountsettings.basic.website':'个人主页',
+  'accountsettings.basic.website-message':'请输入正确的Url地址',
+  'accountsettings.basic.wechat':'微信',
+  'accountsettings.basic.wechat-message':'请输入您的微信号',
+  'accountsettings.basic.cellphone': '联系电话',
+  'accountsettings.basic.cellphone-message': '请输入您的联系电话!',
 };

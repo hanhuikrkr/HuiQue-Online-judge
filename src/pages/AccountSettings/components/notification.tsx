@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-05-16 22:27:37
+ * @LastEditTime: 2021-05-23 21:59:34
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \HuiQue-Online-judge\src\pages\AccountSettings\components\notification.tsx
+ */
 import { List, Switch } from 'antd';
 import React, { Component, Fragment } from 'react';
 
@@ -42,7 +50,7 @@ class NotificationView extends Component {
           dataSource={data}
           renderItem={(item) => (
             <List.Item actions={item.actions}>
-              <List.Item.Meta title={item.title} description={item.description} />
+              <List.Item.Meta title={item.title}  />
             </List.Item>
           )}
         />

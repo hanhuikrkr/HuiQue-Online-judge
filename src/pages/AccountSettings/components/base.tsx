@@ -4,11 +4,9 @@ import { connect, FormattedMessage, formatMessage } from 'umi';
 import React, { Component } from 'react';
 
 import type { CurrentUser } from '../data.d';
-import GeographicView from './GeographicView';
-import PhoneView from './PhoneView';
+
 import styles from './BaseView.less';
 
-const { Option } = Select;
 
 // 头像组件 方便以后独立，增加裁剪之类的功能
 const AvatarView = ({ avatar }: { avatar: string }) => (
@@ -32,39 +30,7 @@ const AvatarView = ({ avatar }: { avatar: string }) => (
     </Upload>
   </>
 );
-type SelectItem = {
-  label: string;
-  key: string;
-};
 
-const validatorGeographic = (
-  _: any,
-  value: {
-    province: SelectItem;
-    city: SelectItem;
-  },
-  callback: (message?: string) => void,
-) => {
-  const { province, city } = value;
-  if (!province.key) {
-    callback('Please input your province!');
-  }
-  if (!city.key) {
-    callback('Please input your city!');
-  }
-  callback();
-};
-
-const validatorPhone = (rule: any, value: string, callback: (message?: string) => void) => {
-  const values = value.split('-');
-  if (!values[0]) {
-    callback('Please input your area code!');
-  }
-  if (!values[1]) {
-    callback('Please input your phone number!');
-  }
-  callback();
-};
 
 type BaseViewProps = {
   currentUser?: CurrentUser;
@@ -76,10 +42,10 @@ class BaseView extends Component<BaseViewProps> {
   getAvatarURL() {
     const { currentUser } = this.props;
     if (currentUser) {
-      if (currentUser.avatar) {
-        return currentUser.avatar;
+      if (currentUser.favicon) {
+        return currentUser.favicon;
       }
-      const url = 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png';
+      const url = 'http://hanhuikrkr.com:7112/404.jpg';
       return url;
     }
     return '';
@@ -118,7 +84,7 @@ class BaseView extends Component<BaseViewProps> {
               <Input />
             </Form.Item>
             <Form.Item
-              name="name"
+              name="nickname"
               label={formatMessage({ id: 'accountsettings.basic.nickname' })}
               rules={[
                 {
@@ -130,7 +96,7 @@ class BaseView extends Component<BaseViewProps> {
               <Input />
             </Form.Item>
             <Form.Item
-              name="profile"
+              name="introduction"
               label={formatMessage({ id: 'accountsettings.basic.profile' })}
               rules={[
                 {
@@ -145,41 +111,40 @@ class BaseView extends Component<BaseViewProps> {
               />
             </Form.Item>
             <Form.Item
-              name="country"
-              label={formatMessage({ id: 'accountsettings.basic.country' })}
+              name="github"
+              label={formatMessage({ id: 'accountsettings.basic.github' })}
               rules={[
                 {
                   required: true,
-                  message: formatMessage({ id: 'accountsettings.basic.country-message' }, {}),
+                  pattern: /^((ht|f)tps?):\/\/[\w\-]+(\.[\w\-]+)+([\w\-.,@?^=%&:\/~+#]*[\w\-@?^=%&\/~+#])?$/,
+                  message: formatMessage({ id: 'accountsettings.basic.github-message' }, {}),
+                },
+
+              ]}
+            >
+               <Input />
+            </Form.Item>
+
+            <Form.Item
+              name="website"
+              label={formatMessage({ id: 'accountsettings.basic.website' })}
+              rules={[
+                {
+                  required: true,
+                  pattern: /^((ht|f)tps?):\/\/[\w\-]+(\.[\w\-]+)+([\w\-.,@?^=%&:\/~+#]*[\w\-@?^=%&\/~+#])?$/,
+                  message: formatMessage({ id: 'accountsettings.basic.website-message' }, {}),
                 },
               ]}
             >
-              <Select style={{ maxWidth: 220 }}>
-                <Option value="China">中国</Option>
-              </Select>
+              <Input />
             </Form.Item>
             <Form.Item
-              name="geographic"
-              label={formatMessage({ id: 'accountsettings.basic.geographic' })}
+              name="wechat"
+              label={formatMessage({ id: 'accountsettings.basic.wechat' })}
               rules={[
                 {
-                  required: true,
-                  message: formatMessage({ id: 'accountsettings.basic.geographic-message' }, {}),
-                },
-                {
-                  validator: validatorGeographic,
-                },
-              ]}
-            >
-              <GeographicView />
-            </Form.Item>
-            <Form.Item
-              name="address"
-              label={formatMessage({ id: 'accountsettings.basic.address' })}
-              rules={[
-                {
-                  required: true,
-                  message: formatMessage({ id: 'accountsettings.basic.address-message' }, {}),
+                  required: false,
+                  message: formatMessage({ id: 'accountsettings.basic.wechat-message' }, {}),
                 },
               ]}
             >
@@ -187,17 +152,18 @@ class BaseView extends Component<BaseViewProps> {
             </Form.Item>
             <Form.Item
               name="phone"
-              label={formatMessage({ id: 'accountsettings.basic.phone' })}
+              label={formatMessage({ id: 'accountsettings.basic.cellphone' })}
               rules={[
                 {
-                  required: true,
-                  message: formatMessage({ id: 'accountsettings.basic.phone-message' }, {}),
+                  required: false,
+                  pattern:/^1[0-9]{10}$/,
+                  message: formatMessage({ id: 'accountsettings.basic.cellphone-message' }, {}),
                 },
-                { validator: validatorPhone },
               ]}
             >
-              <PhoneView />
+              <Input />
             </Form.Item>
+
             <Form.Item>
               <Button htmlType="submit" type="primary">
                 <FormattedMessage

@@ -57,16 +57,16 @@ const PageHeaderContent: React.FC<{ currentUser: CurrentUser }> = ({ currentUser
   return (
     <div className={styles.pageHeaderContent}>
       <div className={styles.avatar}>
-        <Avatar size="large" src={currentUser.avatar} />
+        <Avatar size="large" src={currentUser.favicon||"http://hanhuikrkr.com:7112/404.jpg"} />
       </div>
       <div className={styles.content}>
         <div className={styles.contentTitle}>
           早安，
-          {currentUser.name}
+          {currentUser.nickname||"灰小鹊"}
           ，祝你开心每一天！
         </div>
         <div>
-          {currentUser.title} |{currentUser.group}
+          {currentUser.introduction||"暂无此鹊简介🕊️"} |{currentUser.group}
         </div>
       </div>
     </div>
@@ -76,13 +76,13 @@ const PageHeaderContent: React.FC<{ currentUser: CurrentUser }> = ({ currentUser
 const ExtraContent: React.FC<{}> = () => (
   <div className={styles.extraContent}>
     <div className={styles.statItem}>
-      <Statistic title="项目数" value={56} />
+      <Statistic title="已完成" value={56} suffix=" 题"/>
     </div>
     <div className={styles.statItem}>
-      <Statistic title="团队内排名" value={8} suffix="/ 24" />
+      <Statistic title="进度" value={56} suffix="/ 456" />
     </div>
     <div className={styles.statItem}>
-      <Statistic title="项目访问" value={2223} />
+      <Statistic title="积分" value={2223} />
     </div>
   </div>
 );
@@ -143,10 +143,12 @@ class Workplace extends Component<WorkplaceProps> {
       activitiesLoading,
       radarData,
     } = this.props;
+    console.log("🚀 ~ file: index.tsx ~ line 148 ~ Workplace ~ render ~ currentUser", currentUser)
 
-    if (!currentUser || !currentUser.userid) {
+    if (!currentUser || !currentUser.id) {
       return null;
     }
+
     return (
       <PageContainer
         content={<PageHeaderContent currentUser={currentUser} />}

@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-05-20 23:44:10
+ * @LastEditTime: 2021-05-22 17:41:38
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \HuiQue-Online-judge\src\utils\request.ts
+ */
 /** Request 网络请求工具 更详细的 api 文档: https://github.com/umijs/umi-request */
 import { extend } from 'umi-request';
 import { notification } from 'antd';
@@ -48,7 +56,11 @@ const errorHandler = (error: { response: Response }): Response => {
  * @zh-CN 配置request请求时的默认参数
  */
 const request = extend({
+
   errorHandler, // default error handling
+  headers: {
+    Authorization:localStorage.getItem('huique_oj_changeLoginStatus_accessT')
+  }
 
 });
 

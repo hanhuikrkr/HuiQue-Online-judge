@@ -1,3 +1,5 @@
+// INFO 这里是判断用户是否登入的地方
+// TODO 需要添加游客身份
 import React from 'react';
 import { PageLoading } from '@ant-design/pro-layout';
 import type { ConnectProps } from 'umi';
@@ -37,7 +39,7 @@ class SecurityLayout extends React.Component<SecurityLayoutProps, SecurityLayout
     const { children, loading, currentUser } = this.props;
     // You can replace it to your authentication rule (such as check token exists)
     // You can replace it with your own login authentication rules (such as judging whether the token exists)
-    const isLogin = currentUser && currentUser.userid;
+    const isLogin = currentUser && currentUser.id;
     const queryString = stringify({
       redirect: window.location.href,
     });

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-05-13 17:28:24
- * @LastEditTime: 2021-05-21 17:56:00
+ * @LastEditTime: 2021-05-23 19:49:36
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \HuiQue-Online-judge\src\components\GlobalHeader\RightContent.tsx
@@ -38,7 +38,7 @@ const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = (props) => {
 
   return (
     <div className={className}>
-      <MessageDropDown />
+      <MessageDropDown  />
       <Tooltip title="Use documentation">
         <a
           style={{

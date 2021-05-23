@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-05-16 22:27:37
- * @LastEditTime: 2021-05-21 21:36:55
+ * @LastEditTime: 2021-05-23 21:17:10
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \HuiQue-Online-judge\config\routes.ts
@@ -29,7 +29,7 @@ export default [
           {
             path: '/',
             component: '../layouts/BasicLayout',
-            authority: ['GUEST','ADMIN', 'NORMAL'],
+            authority: ['GUEST', 'ADMIN', 'NORMAL'],
             routes: [
               {
                 path: '/',
@@ -56,12 +56,11 @@ export default [
                 ],
               },
               {
-                name: 'list.table-list',
+                name: '题库',
                 icon: 'code',
                 path: '/list',
                 component: './TableList',
-                authority: ['GUEST','ADMIN', 'USER'],
-
+                authority: ['GUEST', 'ADMIN', 'NORMAL'],
               },
               {
                 path: '/account/center',
@@ -70,6 +69,13 @@ export default [
               {
                 path: '/account/settings',
                 component: './AccountSettings',
+              },
+              {
+                name: '收藏',
+                icon: 'heart',
+                path: '/favorite',
+                component: './Favorite',
+                authority: ['ADMIN', 'NORMAL'],
               },
               {
                 component: './404',

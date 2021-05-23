@@ -1,3 +1,13 @@
+/*
+ * @Author: your name
+ * @Date: 2021-05-13 17:28:24
+ * @LastEditTime: 2021-05-23 16:33:49
+ * @LastEditors: Please set LastEditors
+ * @Description: 这里是用户头像下的下拉列表
+ * 若用户已经登入，则显示信息设置选项和信息展示选项以及退出登入
+ * 若用户尚未登入，则显示去登入注册的入口
+ * @FilePath: \HuiQue-Online-judge\src\components\GlobalHeader\AvatarDropdown.tsx
+ */
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Menu, Spin } from 'antd';
 import React from 'react';
@@ -40,8 +50,8 @@ class AvatarDropdown extends React.Component<GlobalHeaderRightProps> {
   render(): React.ReactNode {
     const {
       currentUser = {
-        avatar: '',
-        name: '',
+        favicon: '',
+        nickname: '',
       },
       menu,
     } = this.props;
@@ -67,23 +77,31 @@ class AvatarDropdown extends React.Component<GlobalHeaderRightProps> {
         </Menu.Item>
       </Menu>
     );
-    return currentUser && currentUser.name ? (
+    const menuForGuest=(
+      <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
+
+      <Menu.Item key="logout">
+        <LogoutOutlined />
+        注册登录
+      </Menu.Item>
+    </Menu>
+    )
+    console.log('currentUser',currentUser)
+    return currentUser && currentUser.id ? (
       <HeaderDropdown overlay={menuHeaderDropdown}>
         <span className={`${styles.action} ${styles.account}`}>
-          <Avatar size="small" className={styles.avatar} src={currentUser.avatar} alt="avatar" />
-          <span className={`${styles.name} anticon`}>{currentUser.name}</span>
+          <Avatar size="small" className={styles.avatar} src={currentUser.favicon||"http://hanhuikrkr.com:7112/404.jpg"} alt="avatar" />
+          <span className={`${styles.name} anticon`}>{currentUser.nickname}</span>
         </span>
       </HeaderDropdown>
     ) : (
+      <HeaderDropdown overlay={menuForGuest}>
       <span className={`${styles.action} ${styles.account}`}>
-        <Spin
-          size="small"
-          style={{
-            marginLeft: 8,
-            marginRight: 8,
-          }}
-        />
+        <Avatar size="small" className={styles.avatar} src="http://hanhuikrkr.com:7112/404.jpg" alt="avatar" />
+        <span className={`${styles.name} anticon`}>{currentUser.nickname}</span>
       </span>
+    </HeaderDropdown>
+
     );
   }
 }

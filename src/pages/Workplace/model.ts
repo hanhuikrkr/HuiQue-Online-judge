@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-05-13 17:28:24
+ * @LastEditTime: 2021-05-23 16:54:04
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \HuiQue-Online-judge\src\pages\Workplace\model.ts
+ */
 import type { Effect, Reducer } from 'umi';
 import type { ActivitiesType, CurrentUser, NoticeType, RadarDataType } from './data.d';
 import { fakeChartData, queryActivities, queryCurrent, queryProjectNotice } from './service';
@@ -45,7 +53,7 @@ const Model: ModelType = {
       yield put({
         type: 'save',
         payload: {
-          currentUser: response,
+          currentUser: response.data,
         },
       });
     },

@@ -5,7 +5,7 @@ import { FormattedMessage, connect } from 'umi';
 import { GridContent } from '@ant-design/pro-layout';
 import { Menu } from 'antd';
 import BaseView from './components/base';
-import BindingView from './components/binding';
+
 import type { CurrentUser } from './data.d';
 import NotificationView from './components/notification';
 import SecurityView from './components/security';
@@ -18,7 +18,7 @@ type AccountSettingsProps = {
   currentUser: CurrentUser;
 };
 
-type AccountSettingsStateKeys = 'base' | 'security' | 'binding' | 'notification';
+type AccountSettingsStateKeys = 'base' | 'security' | 'notification';
 type AccountSettingsState = {
   mode: 'inline' | 'horizontal';
   menuMap: Record<string, React.ReactNode>;
@@ -38,9 +38,7 @@ class AccountSettings extends Component<AccountSettingsProps, AccountSettingsSta
           defaultMessage="Security Settings"
         />
       ),
-      binding: (
-        <FormattedMessage id="accountsettings.menuMap.binding" defaultMessage="Account Binding" />
-      ),
+
       notification: (
         <FormattedMessage
           id="accountsettings.menuMap.notification"
@@ -113,8 +111,7 @@ class AccountSettings extends Component<AccountSettingsProps, AccountSettingsSta
         return <BaseView />;
       case 'security':
         return <SecurityView />;
-      case 'binding':
-        return <BindingView />;
+
       case 'notification':
         return <NotificationView />;
       default:
@@ -125,8 +122,10 @@ class AccountSettings extends Component<AccountSettingsProps, AccountSettingsSta
   };
 
   render() {
+
     const { currentUser } = this.props;
-    if (!currentUser.userid) {
+    console.log("🚀 ~ file: index.tsx ~ line 130 ~ AccountSettings ~ render ~ currentUser", currentUser)
+    if (!currentUser.id) {
       return '';
     }
     const { mode, selectKey } = this.state;

@@ -1,15 +1,13 @@
+/*
+ * @Author: your name
+ * @Date: 2021-05-16 22:27:37
+ * @LastEditTime: 2021-05-23 21:13:00
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \HuiQue-Online-judge\src\pages\AccountSettings\_mock.ts
+ */
 // eslint-disable-next-line import/no-extraneous-dependencies
-import type { Request, Response } from 'express';
-import city from './geographic/city.json';
-import province from './geographic/province.json';
 
-function getProvince(_: Request, res: Response) {
-  return res.json(province);
-}
-
-function getCity(req: Request, res: Response) {
-  return res.json(city[req.params.province]);
-}
 // 代码中会兼容本地 service mock 以及部署站点的静态数据
 export default {
   // 支持值为 Object 和 Array
@@ -63,6 +61,5 @@ export default {
     address: '西湖区工专路 77 号',
     phone: '0752-268888888',
   },
-  'GET  /api/geographic/province': getProvince,
-  'GET  /api/geographic/city/:province': getCity,
+
 };

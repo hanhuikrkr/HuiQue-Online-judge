@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-05-16 22:27:37
+ * @LastEditTime: 2021-05-23 17:27:09
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \HuiQue-Online-judge\src\pages\AccountSettings\locales\zh-CN.ts
+ */
 export default {
   'accountsettings.menuMap.basic': '基本设置',
   'accountsettings.menuMap.security': '安全设置',
@@ -12,14 +20,14 @@ export default {
   'accountsettings.basic.profile': '个人简介',
   'accountsettings.basic.profile-message': '请输入个人简介!',
   'accountsettings.basic.profile-placeholder': '个人简介',
-  'accountsettings.basic.country': '国家/地区',
-  'accountsettings.basic.country-message': '请输入您的国家或地区!',
-  'accountsettings.basic.geographic': '所在省市',
-  'accountsettings.basic.geographic-message': '请输入您的所在省市!',
-  'accountsettings.basic.address': '街道地址',
-  'accountsettings.basic.address-message': '请输入您的街道地址!',
-  'accountsettings.basic.phone': '联系电话',
-  'accountsettings.basic.phone-message': '请输入您的联系电话!',
+  'accountsettings.basic.github':'Github地址',
+  'accountsettings.basic.github-message':'请输入正确的Github地址',
+  'accountsettings.basic.website':'个人主页',
+  'accountsettings.basic.website-message':'请输入正确的Url地址',
+  'accountsettings.basic.wechat':'微信',
+  'accountsettings.basic.wechat-message':'请输入您的微信号',
+  'accountsettings.basic.cellphone': '联系电话',
+  'accountsettings.basic.cellphone-message': '请输入您的联系电话!',
   'accountsettings.basic.update': '更新基本信息',
   'accountsettings.basic.update.success': '更新基本信息成功',
   'accountsettings.security.strong': '强',

@@ -25,12 +25,12 @@ export type NoticeType = {
 };
 
 export type CurrentUser = {
-  name: string;
-  avatar: string;
-  userid: string;
+  nickname: string;
+  favicon: string;
+  id: string;
   notice: NoticeType[];
   email: string;
-  signature: string;
+  introduction: string;
   title: string;
   group: string;
   tags: TagType[];
