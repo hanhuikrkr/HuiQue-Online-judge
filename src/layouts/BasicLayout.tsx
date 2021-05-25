@@ -3,6 +3,7 @@
  *
  * @see You can view component api by: https://github.com/ant-design/ant-design-pro-layout
  */
+// BUG:start here
 import type {
   MenuDataItem,
   BasicLayoutProps as ProLayoutProps,
@@ -67,15 +68,21 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
   const menuDataRef = useRef<MenuDataItem[]>([]);
 
   useEffect(() => {
-    if (dispatch) {
-      dispatch({
-        type: 'user/fetchCurrent',
-      });
+    console.log(dispatch)
+    const isLogin = localStorage.getItem('huique_oj_changeLoginStatus_accessT')
+    if(isLogin){
+      if (dispatch) {
+        dispatch({
+          type: 'user/fetchCurrent',
+        });
+      }
     }
+
   }, []);
   /** Init variables */
 
   const handleMenuCollapse = (payload: boolean): void => {
+
     if (dispatch) {
       dispatch({
         type: 'global/changeLayoutCollapsed',
@@ -90,15 +97,16 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
         authority: undefined,
       },
     [location.pathname],
+    // []
   );
 
-  const { formatMessage } = useIntl();
+  // const { formatMessage } = useIntl();
   console.log(props, settings);
   return (
     <>
       <ProLayout
         logo={logo}
-        formatMessage={formatMessage}
+        // formatMessage={formatMessage}
         {...props}
         {...settings}
         onCollapse={handleMenuCollapse}
@@ -116,7 +124,8 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
         breadcrumbRender={(routers = []) => [
           {
             path: '/',
-            breadcrumbName: formatMessage({ id: 'menu.home' }),
+            // TODO:remenber to change here
+            // breadcrumbName: formatMessage({ id: 'menu.home' }),
           },
           ...routers,
         ]}

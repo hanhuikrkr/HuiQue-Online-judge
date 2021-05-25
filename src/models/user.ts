@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-05-13 17:28:24
- * @LastEditTime: 2021-05-22 18:35:12
+ * @LastEditTime: 2021-05-24 16:49:55
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \HuiQue-Online-judge\src\models\user.ts
@@ -65,10 +65,13 @@ const UserModel: UserModelType = {
         payload: response,
       });
     },
+
     // TODO 这里有bug 搞不清楚如何登入转跳
+    // BUG：16点42分还原设置为了修复
     *fetchCurrent(_, { call, put }) {
       const response = yield call(queryCurrent);
-      console.log('queryCurrent', response);
+      console.log('70 queryCurrent', response);
+
       yield put({
         type: 'saveCurrentUser',
         payload: response.data,

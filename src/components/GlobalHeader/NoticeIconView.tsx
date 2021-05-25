@@ -94,7 +94,7 @@ class GlobalHeaderRight extends Component<GlobalHeaderRightProps> {
     });
     return groupBy(newNotices, 'type');
   };
-
+// TODO:这里有一个未读消息看看能不能用
   getUnreadData = (noticeData: Record<string, NoticeItem[]>) => {
     const unreadMsg: Record<string, number> = {};
     Object.keys(noticeData).forEach((key) => {

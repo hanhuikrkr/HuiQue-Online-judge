@@ -10,7 +10,7 @@ import { message } from 'antd';
 export type StateType = {
   status?: 'ok' | 'error';
   type?: string;
-  currentAuthority?: 'user' | 'guest' | 'admin';
+  currentAuthority?: 'nomal' | 'guest' | 'admin';
 };
 
 export type LoginModelType = {
@@ -74,6 +74,8 @@ const Model: LoginModelType = {
 
     logout() {
       const { redirect } = getPageQuery();
+      localStorage.removeItem('huique_oj_changeLoginStatus_accessT');
+      localStorage.removeItem('huique_oj_changeLoginStatus_refreshT')
       // Note: There may be security issues, please note
       if (window.location.pathname !== '/user/login' && !redirect) {
         history.replace({

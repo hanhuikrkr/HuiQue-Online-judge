@@ -1,6 +1,6 @@
 import { LockOutlined, MailOutlined, BarcodeOutlined, UserOutlined } from '@ant-design/icons';
 import { Alert, message, Tabs } from 'antd';
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import ProForm, { ProFormCaptcha, ProFormCheckbox, ProFormText } from '@ant-design/pro-form';
 import { useIntl, connect, FormattedMessage } from 'umi';
 import { getFakeCaptcha } from '@/services/login';
@@ -44,6 +44,9 @@ const Login: React.FC<LoginProps> = (props) => {
       payload: { ...values, type },
     });
   };
+  useEffect(()=>{
+    console.log('login')
+  })
   return (
     <div className={styles.main}>
       <ProForm

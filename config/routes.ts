@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-05-16 22:27:37
- * @LastEditTime: 2021-05-23 21:17:10
+ * @LastEditTime: 2021-05-24 16:24:26
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \HuiQue-Online-judge\config\routes.ts

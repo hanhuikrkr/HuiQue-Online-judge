@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-05-13 17:28:24
- * @LastEditTime: 2021-05-23 16:33:49
+ * @LastEditTime: 2021-05-25 10:51:17
  * @LastEditors: Please set LastEditors
  * @Description: 这里是用户头像下的下拉列表
  * 若用户已经登入，则显示信息设置选项和信息展示选项以及退出登入
@@ -86,8 +86,10 @@ class AvatarDropdown extends React.Component<GlobalHeaderRightProps> {
       </Menu.Item>
     </Menu>
     )
-    console.log('currentUser',currentUser)
-    return currentUser && currentUser.id ? (
+    const isLogin = localStorage.getItem('huique_oj_changeLoginStatus_accessT')
+
+    // BUG:currentUser
+    return isLogin ? (
       <HeaderDropdown overlay={menuHeaderDropdown}>
         <span className={`${styles.action} ${styles.account}`}>
           <Avatar size="small" className={styles.avatar} src={currentUser.favicon||"http://hanhuikrkr.com:7112/404.jpg"} alt="avatar" />

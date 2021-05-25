@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-05-13 17:28:24
- * @LastEditTime: 2021-05-22 18:35:43
+ * @LastEditTime: 2021-05-25 10:39:58
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \HuiQue-Online-judge\src\services\user.ts
@@ -13,6 +13,7 @@ export async function query(): Promise<any> {
 }
 
 export async function queryCurrent(): Promise<any> {
+  // BUG:queryCurrent修复 16点40分
   // return request('/api/currentUser');
 
   return request('https://ssacgn.online/hqoj/user/info');
