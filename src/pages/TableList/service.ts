@@ -1,10 +1,19 @@
+/*
+ * @Author: your name
+ * @Date: 2021-05-13 17:28:24
+ * @LastEditTime: 2021-05-26 18:52:29
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \HuiQue-Online-judge\src\pages\TableList\service.ts
+ */
 import request from '@/utils/request';
 import type { TableListParams, TableListItem } from './data.d';
+import {API_SERVER}  from '@/constant/api'
 
-export async function queryRule(params?: TableListParams) {
-  return request('/api/rule', {
-    params,
-  });
+export async function queryProblemList(params: TableListParams) {
+  const {pageNumber,pageSize,level} = params
+  console.log(params)
+  return request(`${API_SERVER}/problem?hasCount=true&lastId=0&pageNumber=${pageNumber}&pageSize=${pageSize}&totalCount=0`, );
 }
 
 export async function removeRule(params: { key: number[] }) {
@@ -27,12 +36,6 @@ export async function addRule(params: TableListItem) {
   });
 }
 
-export async function updateRule(params: TableListParams) {
-  return request('/api/rule', {
-    method: 'POST',
-    data: {
-      ...params,
-      method: 'update',
-    },
-  });
+export async function queryTagList(): Promise<any>{
+  return request(`${API_SERVER}/tag/all`);
 }

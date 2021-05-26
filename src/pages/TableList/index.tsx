@@ -1,134 +1,23 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { PlusOutlined, EllipsisOutlined } from '@ant-design/icons';
-import { Button, Tag, Space, Menu, Dropdown } from 'antd';
+import { Button, Tag, Space, Menu, Dropdown, Select } from 'antd';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable, { TableDropdown } from '@ant-design/pro-table';
+import { queryProblemList, queryTagList } from './service';
+import { colors_JP } from '@/constant/data';
 
-type GithubIssueItem = {
-  url: string;
+const { Option } = Select;
+
+type IssueItem = {
   id: number;
   number: number;
   title: string;
-  labels: {
+  tags: {
     name: string;
     color: string;
   }[];
   state: string;
-  comments: number;
-  created_at: string;
-  updated_at: string;
-  closed_at?: string;
 };
-
-const columns: ProColumns<GithubIssueItem>[] = [
-  {
-    dataIndex: 'index',
-    valueType: 'indexBorder',
-    width: 48,
-  },
-  {
-    title: '标题',
-    dataIndex: 'title',
-    copyable: true,
-    ellipsis: true,
-    tip: '标题过长会自动收缩',
-    formItemProps: {
-      rules: [
-        {
-          required: true,
-          message: '此项为必填项',
-        },
-      ],
-    },
-  },
-  {
-    title: '状态',
-    dataIndex: 'state',
-    filters: true,
-    onFilter: true,
-    valueType: 'select',
-    valueEnum: {
-      all: { text: '全部', status: 'Default' },
-      open: {
-        text: '未解决',
-        status: 'Error',
-      },
-      closed: {
-        text: '已解决',
-        status: 'Success',
-        disabled: true,
-      },
-      processing: {
-        text: '解决中',
-        status: 'Processing',
-      },
-    },
-  },
-  {
-    title: '标签',
-    dataIndex: 'labels',
-    search: false,
-    renderFormItem: (_, { defaultRender }) => {
-      return defaultRender(_);
-    },
-    render: (_, record) => (
-      <Space>
-        {record.labels.map(({ name, color }) => (
-          <Tag color={color} key={name}>
-            {name}
-          </Tag>
-        ))}
-      </Space>
-    ),
-  },
-  {
-    title: '创建时间',
-    key: 'showTime',
-    dataIndex: 'created_at',
-    valueType: 'date',
-    sorter: true,
-    hideInSearch: true,
-  },
-  {
-    title: '创建时间',
-    dataIndex: 'created_at',
-    valueType: 'dateRange',
-    hideInTable: true,
-    search: {
-      transform: (value) => {
-        return {
-          startTime: value[0],
-          endTime: value[1],
-        };
-      },
-    },
-  },
-  {
-    title: '操作',
-    valueType: 'option',
-    render: (text, record, _, action) => [
-      <a
-        key="editable"
-        onClick={() => {
-          action?.startEditable?.(record.id);
-        }}
-      >
-        编辑
-      </a>,
-      <a href={record.url} target="_blank" rel="noopener noreferrer" key="view">
-        查看
-      </a>,
-      <TableDropdown
-        key="actionGroup"
-        onSelect={() => action?.reload()}
-        menus={[
-          { key: 'copy', name: '复制' },
-          { key: 'delete', name: '删除' },
-        ]}
-      />,
-    ],
-  },
-];
 
 const menu = (
   <Menu>
@@ -140,14 +29,105 @@ const menu = (
 
 export default () => {
   const actionRef = useRef<ActionType>();
+  const [tagList, setTagList] = useState<Array<any>>([]);
+  useEffect(() => {
+    setTagList(JSON.parse(localStorage.getItem("huique_oj_taglist")))
+  }, []);
+  const columns: ProColumns<IssueItem>[] = [
+    {
+      title: '标题',
+      dataIndex: 'name',
+      copyable: true,
+      ellipsis: true,
+      tip: '标题过长会自动收缩',
+      formItemProps: {
+        rules: [
+          {
+            required: true,
+            message: '此项为必填项',
+          },
+        ],
+      },
+      render: (_) => <a>{_}</a>,
+    },
+    {
+      title: '难度',
+      dataIndex: 'level',
+      filters: true,
+      onFilter: true,
+      valueType: 'select',
+      valueEnum: {
+        all: { text: '全部', status: 'Default' },
+        EASY: {
+          text: '简单',
+          status: 'Success',
+        },
+        MEDIUM: {
+          text: '中等',
+          status: 'Warning',
+        },
+        HARD: {
+          text: '困难',
+          status: 'Error',
+        },
+      },
+    },
+    {
+      title: '标签',
+      dataIndex: 'tags',
+      filters: true,
+      onFilter: true,
 
+      renderFormItem: (item, { type, defaultRender, ...rest }, form) => {
+        if (type === 'form') {
+          return null;
+        }
+        console.log("tagList local_storage",tagList.data);
+        return <Select mode="multiple" allowClear />;
+      },
+      render: (_, record) => (
+        <Space>
+          {record.tags.map(({ name, color }) => (
+            <Tag color={color} key={name}>
+              {name}
+            </Tag>
+          ))}
+        </Space>
+      ),
+    },
+  ];
   return (
-    <ProTable<GithubIssueItem>
+    // https://procomponents.ant.design/components/table#%E6%90%9C%E7%B4%A2%E8%A1%A8%E5%8D%95%E8%87%AA%E5%AE%9A%E4%B9%89
+    <ProTable<IssueItem>
       columns={columns}
       actionRef={actionRef}
-      request={
-        //todo
-      }
+      request={async (params) => {
+        console.log(params);
+        let res = await queryProblemList({
+          pageNumber: params.current - 1,
+          pageSize: params.pageSize,
+        });
+        let taglist = await queryTagList();
+        localStorage.setItem("huique_oj_taglist",JSON.stringify(taglist))
+        console.log(res, taglist);
+        let data = res.data.data.map((oldData) => {
+          let oldtags = JSON.parse(oldData.tags);
+          console.log(oldtags);
+          let tagsWithInfo = oldtags.map((item: Number) => {
+            return {
+              name: taglist.data[item].name,
+              color: colors_JP[Math.floor(Math.random() * colors_JP.length)],
+            };
+          });
+          oldData.tags = tagsWithInfo;
+          return oldData;
+        });
+        return {
+          data: data,
+          sucess: res.sucess,
+          total: res.data.totalCount,
+        };
+      }}
       editable={{
         type: 'multiple',
       }}
@@ -172,16 +152,16 @@ export default () => {
       }}
       dateFormatter="string"
       headerTitle="高级表格"
-      toolBarRender={() => [
-        <Button key="button" icon={<PlusOutlined />} type="primary">
-          新建
-        </Button>,
-        <Dropdown key="menu" overlay={menu}>
-          <Button>
-            <EllipsisOutlined />
-          </Button>
-        </Dropdown>,
-      ]}
+      // toolBarRender={() => [
+      //   <Button key="button" icon={<PlusOutlined />} type="primary">
+      //     新建
+      //   </Button>,
+      //   <Dropdown key="menu" overlay={menu}>
+      //     <Button>
+      //       <EllipsisOutlined />
+      //     </Button>
+      //   </Dropdown>,
+      // ]}
     />
   );
 };
