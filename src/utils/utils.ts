@@ -22,3 +22,15 @@ export const isAntDesignProOrDev = (): boolean => {
 };
 
 export const getPageQuery = () => parse(window.location.href.split('?')[1]);
+
+
+export  const getUserToken = () => {
+  return localStorage.getItem('huique_oj_changeLoginStatus_accessT');
+};
+export const getUserRefreshToken = () => {
+  return localStorage.getItem('huique_oj_changeLoginStatus_refreshT');
+};
+export const removeUserToken = () => {
+  localStorage.removeItem('huique_oj_changeLoginStatus_accessT');
+  localStorage.removeItem('huique_oj_changeLoginStatus_refreshT')
+};
