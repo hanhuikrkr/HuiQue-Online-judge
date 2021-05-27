@@ -5,6 +5,7 @@ import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable, { TableDropdown } from '@ant-design/pro-table';
 import { queryProblemList, queryTagList } from './service';
 import { colors_antd } from '@/constant/data';
+import { Link } from 'umi';
 
 const { Option } = Select;
 
@@ -48,15 +49,15 @@ export default () => {
           },
         ],
       },
-      render: (_) => <a>{_}</a>,
-      width:"50%",
+      render: (_,record) => <Link to={{ pathname: `/issuecode`,search:`?id=${record.id}` }}>{_}</Link>,
+      width: '50%',
     },
     {
       title: '难度',
       dataIndex: 'level',
       filters: true,
       onFilter: true,
-      width:"15%",
+      width: '15%',
       valueType: 'select',
       valueEnum: {
         all: { text: '全部', status: 'Default' },
@@ -96,7 +97,7 @@ export default () => {
         return <Select mode="multiple" allowClear></Select>;
       },
       render: (_, record) => (
-        <Space size={[0,8]} wrap>
+        <Space size={[0, 8]} wrap>
           {record.tags.map(({ name, color }) => (
             <Tag color={color} key={name}>
               {name}
@@ -124,7 +125,7 @@ export default () => {
           pageNumber: params.current - 1,
           pageSize: params.pageSize,
           level: params.level,
-          tags: params.tags
+          tags: params.tags,
         });
         let taglist = await queryTagList();
         localStorage.setItem('huique_oj_taglist', JSON.stringify(taglist.data));
@@ -135,8 +136,8 @@ export default () => {
           let tagsWithInfo = oldtags.map((item: Number) => {
             // console.log("taglist.data[item].name",taglist.data[item-1]);
             return {
-              name: taglist.data[item-1].name,
-              color: colors_antd[(item-1)%colors_antd.length],
+              name: taglist.data[item - 1].name,
+              color: colors_antd[(item - 1) % colors_antd.length],
             };
           });
           oldData.tags = tagsWithInfo;
