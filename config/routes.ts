@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-05-16 22:27:37
- * @LastEditTime: 2021-05-24 16:24:26
+ * @LastEditTime: 2021-05-27 22:47:09
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \HuiQue-Online-judge\config\routes.ts
@@ -76,6 +76,18 @@ export default [
                 path: '/favorite',
                 component: './Favorite',
                 authority: ['ADMIN', 'NORMAL'],
+              },
+              {
+
+                icon: 'smile',
+                path: '/issuecode',
+                component: './Issue',
+              },
+              {
+                name: '搜索列表（文章）',
+                icon: 'smile',
+                path: '/articlesforlist',
+                component: './ArticlesForList',
               },
               {
                 component: './404',

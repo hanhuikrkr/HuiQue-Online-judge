@@ -1,13 +1,15 @@
 /*
  * @Author: your name
  * @Date: 2021-05-20 23:44:10
- * @LastEditTime: 2021-05-27 21:11:45
+ * @LastEditTime: 2021-05-27 22:45:59
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \HuiQue-Online-judge\src\utils\request.ts
  */
 /** Request 网络请求工具 更详细的 api 文档: https://github.com/umijs/umi-request */
 import { extend } from 'umi-request';
+import {history} from 'umi'
+import { stringify } from 'querystring';
 import { notification } from 'antd';
 import { API_SERVER } from '@/constant/api'
 const codeMessage: Record<number, string> = {
@@ -104,6 +106,14 @@ request.interceptors.response.use(async (response, options) => {
     localStorage.setItem('huique_oj_changeLoginStatus_accessT', tokenData.data.accessToken)
     localStorage.setItem('huique_oj_changeLoginStatus_refreshT', tokenData.data.refreshToken)
     return retry(response, options)
+  }
+  if((data===1&&success===false)||(data===2&&success===false)||(data===5&&success===false)){
+    history.replace({
+      pathname: '/user/login',
+      search: stringify({
+        redirect: window.location.href,
+      }),
+    });
   }
   return response
 });
