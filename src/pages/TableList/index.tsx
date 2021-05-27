@@ -4,7 +4,7 @@ import { Button, Tag, Space, Menu, Dropdown, Select } from 'antd';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable, { TableDropdown } from '@ant-design/pro-table';
 import { queryProblemList, queryTagList } from './service';
-import { colors_JP } from '@/constant/data';
+import { colors_antd } from '@/constant/data';
 
 const { Option } = Select;
 
@@ -31,7 +31,7 @@ export default () => {
   const actionRef = useRef<ActionType>();
   const [tagList, setTagList] = useState<Array<any>>([]);
   useEffect(() => {
-    setTagList(JSON.parse(localStorage.getItem("huique_oj_taglist")))
+    setTagList(JSON.parse(localStorage.getItem('huique_oj_taglist')));
   }, []);
   const columns: ProColumns<IssueItem>[] = [
     {
@@ -49,12 +49,14 @@ export default () => {
         ],
       },
       render: (_) => <a>{_}</a>,
+      width:"50%",
     },
     {
       title: '难度',
       dataIndex: 'level',
       filters: true,
       onFilter: true,
+      width:"15%",
       valueType: 'select',
       valueEnum: {
         all: { text: '全部', status: 'Default' },
@@ -82,11 +84,19 @@ export default () => {
         if (type === 'form') {
           return null;
         }
-        console.log("tagList local_storage",tagList.data);
-        return <Select mode="multiple" allowClear />;
+        // console.log('tagList local_storage', tagList);
+        if (tagList)
+          return (
+            <Select mode="multiple" allowClear defaultValue={[]}>
+              {tagList.map((tag) => {
+                return <option key={tag.id}>{tag.name}</option>;
+              })}
+            </Select>
+          );
+        return <Select mode="multiple" allowClear></Select>;
       },
       render: (_, record) => (
-        <Space>
+        <Space size={[0,8]} wrap>
           {record.tags.map(({ name, color }) => (
             <Tag color={color} key={name}>
               {name}
@@ -94,6 +104,13 @@ export default () => {
           ))}
         </Space>
       ),
+    },
+    {
+      title: '积分',
+      dataIndex: 'point',
+      key: 'digit',
+      valueType: 'digit',
+      width: 80,
     },
   ];
   return (
@@ -106,17 +123,20 @@ export default () => {
         let res = await queryProblemList({
           pageNumber: params.current - 1,
           pageSize: params.pageSize,
+          level: params.level,
+          tags: params.tags
         });
         let taglist = await queryTagList();
-        localStorage.setItem("huique_oj_taglist",JSON.stringify(taglist))
-        console.log(res, taglist);
+        localStorage.setItem('huique_oj_taglist', JSON.stringify(taglist.data));
+        // console.log(res, taglist);
         let data = res.data.data.map((oldData) => {
           let oldtags = JSON.parse(oldData.tags);
           console.log(oldtags);
           let tagsWithInfo = oldtags.map((item: Number) => {
+            // console.log("taglist.data[item].name",taglist.data[item-1]);
             return {
-              name: taglist.data[item].name,
-              color: colors_JP[Math.floor(Math.random() * colors_JP.length)],
+              name: taglist.data[item-1].name,
+              color: colors_antd[(item-1)%colors_antd.length],
             };
           });
           oldData.tags = tagsWithInfo;

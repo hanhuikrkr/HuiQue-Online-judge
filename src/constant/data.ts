@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-05-26 18:08:37
- * @LastEditTime: 2021-05-26 18:21:23
+ * @LastEditTime: 2021-05-27 14:00:09
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \HuiQue-Online-judge\src\constant\data.ts
@@ -259,3 +259,5 @@ export const colors_JP = [
   "#0C0C0C",
 
 ]
+
+export const colors_antd = ["pink", "red", "yellow", "orange", "cyan", "green", "blue", "purple", "geekblue", "magenta", "volcano", "gold", "lime"]

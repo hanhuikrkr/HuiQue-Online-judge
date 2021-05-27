@@ -1,4 +1,4 @@
-import { UploadOutlined } from '@ant-design/icons';
+import { UploadOutlined, LoadingOutlined } from '@ant-design/icons';
 import { Button, Input, Select, Upload, Form, message } from 'antd';
 import { connect, FormattedMessage, formatMessage } from 'umi';
 import React, { Component } from 'react';
@@ -7,30 +7,19 @@ import type { CurrentUser } from '../data.d';
 
 import styles from './BaseView.less';
 
-
+const beforeUpload = (file: File) => {
+  const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+  if (!isJpgOrPng) {
+    message.error('只能上传 JPG/PNG 文件哦!');
+  }
+  const isLt2M = file.size / 1024 / 1024 < 2;
+  if (!isLt2M) {
+    message.error('文件需小于 2MB 哦!');
+  }
+  return isJpgOrPng && isLt2M;
+};
 // 头像组件 方便以后独立，增加裁剪之类的功能
-const AvatarView = ({ avatar }: { avatar: string }) => (
-  <>
-    <div className={styles.avatar_title}>
-      <FormattedMessage id="accountsettings.basic.avatar" defaultMessage="Avatar" />
-    </div>
-    <div className={styles.avatar}>
-      <img src={avatar} alt="avatar" />
-    </div>
-    <Upload showUploadList={false}>
-      <div className={styles.button_view}>
-        <Button>
-          <UploadOutlined />
-          <FormattedMessage
-            id="accountsettings.basic.change-avatar"
-            defaultMessage="Change avatar"
-          />
-        </Button>
-      </div>
-    </Upload>
-  </>
-);
-
+const AvatarView = ({ avatar }: { avatar: string }) => <></>;
 
 type BaseViewProps = {
   currentUser?: CurrentUser;
@@ -38,7 +27,9 @@ type BaseViewProps = {
 
 class BaseView extends Component<BaseViewProps> {
   view: HTMLDivElement | undefined = undefined;
-
+  state = {
+    loading: false,
+  };
   getAvatarURL() {
     const { currentUser } = this.props;
     if (currentUser) {
@@ -61,7 +52,7 @@ class BaseView extends Component<BaseViewProps> {
 
   render() {
     const { currentUser } = this.props;
-
+    const { loading } = this.state;
     return (
       <div className={styles.baseView} ref={this.getViewDom}>
         <div className={styles.left}>
@@ -116,13 +107,13 @@ class BaseView extends Component<BaseViewProps> {
               rules={[
                 {
                   required: true,
-                  pattern: /^((ht|f)tps?):\/\/[\w\-]+(\.[\w\-]+)+([\w\-.,@?^=%&:\/~+#]*[\w\-@?^=%&\/~+#])?$/,
+                  pattern:
+                    /^((ht|f)tps?):\/\/[\w\-]+(\.[\w\-]+)+([\w\-.,@?^=%&:\/~+#]*[\w\-@?^=%&\/~+#])?$/,
                   message: formatMessage({ id: 'accountsettings.basic.github-message' }, {}),
                 },
-
               ]}
             >
-               <Input />
+              <Input />
             </Form.Item>
 
             <Form.Item
@@ -131,7 +122,8 @@ class BaseView extends Component<BaseViewProps> {
               rules={[
                 {
                   required: true,
-                  pattern: /^((ht|f)tps?):\/\/[\w\-]+(\.[\w\-]+)+([\w\-.,@?^=%&:\/~+#]*[\w\-@?^=%&\/~+#])?$/,
+                  pattern:
+                    /^((ht|f)tps?):\/\/[\w\-]+(\.[\w\-]+)+([\w\-.,@?^=%&:\/~+#]*[\w\-@?^=%&\/~+#])?$/,
                   message: formatMessage({ id: 'accountsettings.basic.website-message' }, {}),
                 },
               ]}
@@ -156,7 +148,7 @@ class BaseView extends Component<BaseViewProps> {
               rules={[
                 {
                   required: false,
-                  pattern:/^1[0-9]{10}$/,
+                  pattern: /^1[0-9]{10}$/,
                   message: formatMessage({ id: 'accountsettings.basic.cellphone-message' }, {}),
                 },
               ]}
@@ -175,7 +167,26 @@ class BaseView extends Component<BaseViewProps> {
           </Form>
         </div>
         <div className={styles.right}>
-          <AvatarView avatar={this.getAvatarURL()} />
+          {/* <AvatarView avatar={this.getAvatarURL()} />
+           */}
+          <div className={styles.avatar_title}>
+            <FormattedMessage id="accountsettings.basic.avatar" defaultMessage="Avatar" />
+          </div>
+          <div className={styles.avatar}>
+            {loading ? <LoadingOutlined /> : <img src={this.getAvatarURL()} alt="avatar" />}
+          </div>
+          <Upload showUploadList={false} beforeUpload={beforeUpload} method={"post"} action="https://sm.ms/api/v2/upload" headers={ {"Content-Type": "multipart/form-data", "Authorization": `rYraBpOP5l0Fz9rC2BoYsqfQToEiWWUp`,}}>
+            {/* //todo 添加头像上传地址 */}
+            <div className={styles.button_view}>
+              <Button onClick={this.handleUpload} loading={loading}>
+                <UploadOutlined />
+                <FormattedMessage
+                  id="accountsettings.basic.change-avatar"
+                  defaultMessage="Change avatar"
+                />
+              </Button>
+            </div>
+          </Upload>
         </div>
       </div>
     );

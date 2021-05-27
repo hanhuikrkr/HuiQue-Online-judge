@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-05-20 23:44:10
- * @LastEditTime: 2021-05-26 22:57:55
+ * @LastEditTime: 2021-05-27 21:11:45
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \HuiQue-Online-judge\src\utils\request.ts
@@ -9,7 +9,7 @@
 /** Request 网络请求工具 更详细的 api 文档: https://github.com/umijs/umi-request */
 import { extend } from 'umi-request';
 import { notification } from 'antd';
-import {API_SERVER} from '@/constant/api'
+import { API_SERVER } from '@/constant/api'
 const codeMessage: Record<number, string> = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
@@ -50,7 +50,14 @@ const errorHandler = (error: { response: Response }): Response => {
   }
   return response;
 };
-
+async function refreshToken(){
+  return request(`${API_SERVER}/user/refresh`,{
+    method:'POST',
+    params: {
+      token:getUserRefreshToken(),
+    }
+  })
+}
 /**
  * @en-US Configure the default parameters for request
  * @zh-CN 配置request请求时的默认参数
@@ -64,39 +71,46 @@ const request = extend({
 request.interceptors.request.use(async (url, options) => {
 
   const token = getUserToken();
-  if( token ){
-      //如果有token 就走token逻辑
-      const headers = {
-          Authorization: `${token}`,
-      };
-      //如果是刷新token接口，就直接过，不要拦截它！！！
-      return (
-        {
-          url: url,
-          options: { ...options, headers: headers },
-        }
-      );
-    }
-    else {
-      return (
-        {
-          url: url,
-          options: { ...options },
-        }
-      );
-    }
+  if (token) {
+    //如果有token 就走token逻辑
+    let headers = {
+      Authorization: `${token}`,
+    };
+    return (
+      {
+        url: url,
+        options: { ...options, headers: headers },
+      }
+    );
+  }
+  else {
+    return (
+      {
+        url: url,
+        options: { ...options },
+      }
+    );
+  }
 
 })
 request.interceptors.response.use(async (response, options) => {
   const result = await response.clone().json()
-  const {data, message, success} = result;
-  console.log("拦截response",result);
-// todo 如何拦截存疑
+  const { data, message, success } = result;
+  console.log("拦截response", result);
+  if(data===3&&success===false){
+    console.log("更新token")
+    let tokenData = await refreshToken();
+    console.log(tokenData)
+    localStorage.setItem('huique_oj_changeLoginStatus_accessT', tokenData.data.accessToken)
+    localStorage.setItem('huique_oj_changeLoginStatus_refreshT', tokenData.data.refreshToken)
+    return retry(response, options)
+  }
   return response
 });
 
 const retry = (response, options) => {
   return request(response.url, options)
 }
-const getUserToken=()=> { return (localStorage.getItem('huique_oj_changeLoginStatus_accessT')) }
+const getUserToken = () => { return (localStorage.getItem('huique_oj_changeLoginStatus_accessT')) }
+const getUserRefreshToken = () => { return (localStorage.getItem('huique_oj_changeLoginStatus_refreshT')) }
 export default request;
