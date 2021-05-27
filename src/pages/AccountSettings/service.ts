@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2021-05-16 22:27:37
- * @LastEditTime: 2021-05-27 20:51:11
- * @LastEditors: your name
+ * @LastEditTime: 2021-05-27 21:31:02
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \HuiQue-Online-judge\src\pages\AccountSettings\service.ts
  */
@@ -33,13 +33,11 @@ export async function query() {
   return request('/api/users');
 }
 
-export async function uploadImg(img) {
-  return request(`${PIC_SERVER}/upload`), {
-    method: 'POST',
-    headers: {
-      "Content-Type": "multipart/form-data"
-    },
-    params: { smfile: img }
+export async function uploadUserInfo(params) {
+  return request(`${API_SERVER}/user/info`), {
+    method: 'PUT',
+
+    params: params
 
   }
 }

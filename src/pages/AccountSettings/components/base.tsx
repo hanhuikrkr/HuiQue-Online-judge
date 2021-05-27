@@ -2,7 +2,7 @@ import { UploadOutlined, LoadingOutlined } from '@ant-design/icons';
 import { Button, Input, Select, Upload, Form, message } from 'antd';
 import { connect, FormattedMessage, formatMessage } from 'umi';
 import React, { Component } from 'react';
-
+import { uploadUserInfo } from '@/pages/AccountSettings/service';
 import type { CurrentUser } from '../data.d';
 
 import styles from './BaseView.less';
@@ -25,21 +25,28 @@ type BaseViewProps = {
   currentUser?: CurrentUser;
 };
 
+function getBase64(img, callback) {
+  const reader = new FileReader();
+  reader.addEventListener('load', () => callback(reader.result));
+  reader.readAsDataURL(img);
+}
 class BaseView extends Component<BaseViewProps> {
   view: HTMLDivElement | undefined = undefined;
   state = {
     loading: false,
+    imgUrl: '',
   };
   getAvatarURL() {
     const { currentUser } = this.props;
+    let url = 'http://hanhuikrkr.com:7112/404.jpg';
     if (currentUser) {
       if (currentUser.favicon) {
-        return currentUser.favicon;
+        url = currentUser.favicon;
       }
-      const url = 'http://hanhuikrkr.com:7112/404.jpg';
-      return url;
     }
-    return '';
+    this.setState({
+      imgUrl: url,
+    });
   }
 
   getViewDom = (ref: HTMLDivElement) => {
@@ -49,7 +56,27 @@ class BaseView extends Component<BaseViewProps> {
   handleFinish = () => {
     message.success(formatMessage({ id: 'accountsettings.basic.update.success' }));
   };
-
+  handleChange = (info) => {
+    if (info.file.status === 'uploading') {
+      this.setState({ loading: true });
+      return;
+    }
+    if (info.file.status === 'done') {
+      // Get this url from response in real world.
+      getBase64(info.file.originFileObj, (imageUrl) =>
+        uploadUserInfo({ favicon: imageUrl }).then((r) => {
+          console.log(r);
+          this.setState({
+            imgUrl: imageUrl,
+            loading: false,
+          });
+        }),
+      );
+    }
+  };
+  componentDidMount = () => {
+    this.getAvatarURL();
+  };
   render() {
     const { currentUser } = this.props;
     const { loading } = this.state;
@@ -173,12 +200,22 @@ class BaseView extends Component<BaseViewProps> {
             <FormattedMessage id="accountsettings.basic.avatar" defaultMessage="Avatar" />
           </div>
           <div className={styles.avatar}>
-            {loading ? <LoadingOutlined /> : <img src={this.getAvatarURL()} alt="avatar" />}
+            {loading ? <LoadingOutlined /> : <img src={this.state.imgUrl} alt="avatar" />}
           </div>
-          <Upload showUploadList={false} beforeUpload={beforeUpload} method={"post"} action="https://sm.ms/api/v2/upload" headers={ {"Content-Type": "multipart/form-data", "Authorization": `rYraBpOP5l0Fz9rC2BoYsqfQToEiWWUp`,}}>
+          <Upload
+            showUploadList={false}
+            beforeUpload={beforeUpload}
+            method={'post'}
+            onChange={this.handleChange}
+            action="https://sm.ms/api/v2/upload"
+            headers={{
+              'Content-Type': 'multipart/form-data',
+              Authorization: `rYraBpOP5l0Fz9rC2BoYsqfQToEiWWUp`,
+            }}
+          >
             {/* //todo 添加头像上传地址 */}
             <div className={styles.button_view}>
-              <Button onClick={this.handleUpload} loading={loading}>
+              <Button loading={loading}>
                 <UploadOutlined />
                 <FormattedMessage
                   id="accountsettings.basic.change-avatar"
