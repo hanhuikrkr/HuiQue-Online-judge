@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import useDraggable from './hooks/useDraggable';
 import styles from './IssueDetail.less';
+import {def_code} from'@/constant/data';
 import DraggleLayout from './DraggleLayout';
 import { LanguageSelect } from '@/components/LanguageSelect/index';
 import MarkdownArea from '@/components/Markdowm/index';
@@ -26,7 +27,9 @@ import 'codemirror/addon/edit/closebrackets';
 import 'codemirror/addon/edit/matchbrackets';
 
 const mode = { PYTHON: 'text/x-python', CPP: 'text/x-c++src', JAVA: 'text/x-java' };
-const options=(language) =>{ return{
+const options=(language) =>{ 
+  
+  return{
   theme: 'solarized',
   autofocus: true, //自动获取焦点
   styleActiveLine: true, //光标代码高亮
@@ -57,10 +60,11 @@ const options=(language) =>{ return{
 function IssueDetail({ tab = 1, issue = { description: '' } }) {
   const [language, setLanguage] = useState('CPP');
   const handleLanguage = (value) => {
-    console.log(value);
+    setCodevalue(def_code[value])
     setLanguage(value)
   };
   const [codevalue, setCodevalue] = useState('');
+
   return (
     <DraggleLayout
       containerWidth={window.innerWidth-48}
