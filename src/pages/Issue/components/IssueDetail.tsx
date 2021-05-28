@@ -63,7 +63,7 @@ function IssueDetail({ tab = 1, issue = { description: '' } }) {
   const [codevalue, setCodevalue] = useState('');
   return (
     <DraggleLayout
-      containerWidth={window.innerWidth}
+      containerWidth={window.innerWidth-48}
       containerHeight={window.innerHeight * 0.7}
       min={window.innerWidth / 5}
       max={window.innerWidth / 1.5}
@@ -81,7 +81,6 @@ function IssueDetail({ tab = 1, issue = { description: '' } }) {
       <div
         style={{
           height: '100%',
-          display: 'flex',
         }}
       >
         <MarkdownArea content={issue.description} />
@@ -89,17 +88,16 @@ function IssueDetail({ tab = 1, issue = { description: '' } }) {
       <div
         style={{
           height: '100%',
-          display: 'flex',
           padding: '40px',
+          overflowY:"scroll"
         }}
       >
         <div>
           <Space size={[60, 60]}>
             <LanguageSelect handleChange={handleLanguage} defaultvalue={'C/C++'} />
             <Button type="primary"> 提交</Button>
-          </Space>
+            </Space>
           <CodeMirror
-          style={{width:"100%"}}
             value={codevalue}
             options={options(language)}
             onBeforeChange={(editor, data, value) => {

@@ -261,3 +261,31 @@ export const colors_JP = [
 ]
 
 export const colors_antd = ["pink", "red", "yellow", "orange", "cyan", "green", "blue", "purple", "geekblue", "magenta", "volcano", "gold", "lime"]
+
+export const def_code={
+  CPP:`#include<stdio.h> 
+  int main(){
+      int a,b;
+      // 读取输入
+      scanf("%d %d",&a,&b);
+      // 输出答案
+      printf("%d",a+b);
+  }`, 
+JAVA:`import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        // 读取输入
+        int a = scanner.nextInt();
+        int b = scanner.nextInt();
+        // 输出答案
+        System.out.println(a+b);
+    }
+}
+`,
+PYTHON:`# 读取输入
+s=input().split()
+# 输出答案
+print(int(s[0])+int(s[1]))`
+}
