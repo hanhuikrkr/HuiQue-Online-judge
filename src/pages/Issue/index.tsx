@@ -12,13 +12,11 @@ import React, { useState, useEffect } from 'react';
 import { Space, Spin } from 'antd';
 import styles from './index.less';
 import { colors_antd } from '@/constant/data';
+import IssueDetail from './components/IssueDetail';
 import { Link } from 'umi';
 import { Button, Card, Icon, message, Tag } from 'antd';
 import './index.less';
-import QueueAnim from 'rc-queue-anim';
-import ProblemDes from './problemdes';
-import ProblemSub from './problemsub';
-import * as requestService from 'utils/request';
+
 import { queryIssueDetails } from './server';
 
 export default (props: any) => {
@@ -34,6 +32,7 @@ export default (props: any) => {
     point:0,
   });
   const [tagList, setTagList] = useState([]);
+  const [tab,setTab]= useState(1)
   useEffect(() => {
     queryIssueDetails({ id: props.location.query.id }).then((r) => {
       console.log('issue detail page=====>');
@@ -51,8 +50,13 @@ export default (props: any) => {
 
     setTagList(JSON.parse(localStorage.getItem('huique_oj_taglist')));
   }, []);
+  const onTabChange=(value)=>{
+    console.log("you click tabs with value",value);
+    setTab(value);
+  }
   return (
     <PageContainer
+    className={styles.main}
       fixedHeader
       header={{
         title: issues.name,
@@ -64,7 +68,7 @@ export default (props: any) => {
           </span>
 
           <Space align="center" size={[8, 16]}>
-            <span>标签</span>
+            <span>标签：</span>
             {issues.tags.map((tag) => {
               return <Tag color={colors_antd[tag - 1]}>{tagList[tag - 1].name}</Tag>;
             })}
@@ -72,6 +76,12 @@ export default (props: any) => {
 
           <span style={{ marginLeft: '10%' }}>
             积分：<span style={{ color:"grey" ,fontFamily:"system-ui"}}>{issues.point}</span>
+          </span>
+          <span style={{ marginLeft: '10%' }}>
+            运行限时：<span style={{ color:"grey" ,fontFamily:"system-ui"}}>{(issues.timeLimit/1000)>=1?issues.timeLimit/1000+" s":issues.timeLimit+" ms"} </span>
+          </span>
+          <span style={{ marginLeft: '10%' }}>
+            空间限制：<span style={{ color:"grey" ,fontFamily:"system-ui"}}>{(issues.spaceLimit/1000)>=0.1?issues.spaceLimit/1000/1000+" MB":issues.spaceLimit/1000+" KB"} </span>
           </span>
         </>
       }
@@ -89,14 +99,11 @@ export default (props: any) => {
           key: '3',
         },
       ]}
+      onTabChange={onTabChange}
+
     >
-      <ProCard direction="column" ghost gutter={[0, 16]}>
-        <ProCard style={{ height: 200 }} />
-        <ProCard gutter={16} ghost style={{ height: 200 }}>
-          <ProCard colSpan={16} />
-          <ProCard colSpan={8} />
-        </ProCard>
-      </ProCard>
+      <IssueDetail tab={tab} issue={issues}/>
+      
     </PageContainer>
   );
 };

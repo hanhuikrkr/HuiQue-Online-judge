@@ -20,7 +20,7 @@ import RightContent from '@/components/GlobalHeader/RightContent';
 import type { ConnectState } from '@/models/connect';
 import { getMatchMenu } from '@umijs/route-utils';
 import logo from '../assets/logo.svg'
-
+import styles from './BasicLayout.less';
 const noMatch = (
   <Result
     status={403}
@@ -105,6 +105,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
   return (
     <>
       <ProLayout
+
         logo={logo}
         // formatMessage={formatMessage}
         {...props}
@@ -151,7 +152,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
         }}
 
       >
-        <Authorized authority={authorized!.authority} noMatch={noMatch}>
+        <Authorized authority={authorized!.authority} noMatch={noMatch} >
           {children}
         </Authorized>
       </ProLayout>
