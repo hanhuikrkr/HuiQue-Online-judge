@@ -14,14 +14,14 @@ type ArticleListContentProps = {
 };
 
 const ArticleListContent: React.FC<ArticleListContentProps> = ({
-  data: { content, updatedAt, avatar, owner, href },
+  data: { summary, userNickName, time },
 }) => (
   <div className={styles.listContent}>
-    <div className={styles.description}>{content}</div>
+    <div className={styles.description}>{summary}</div>
     <div className={styles.extra}>
-      <Avatar src={avatar} size="small" />
-      <a href={href}>{owner}</a> 发布在 <a href={href}>{href}</a>
-      <em>{moment(updatedAt).format('YYYY-MM-DD HH:mm')}</em>
+    
+      <a>{userNickName}</a> 发布在
+      <em>{moment(time).format('YYYY-MM-DD HH:mm')}</em>
     </div>
   </div>
 );

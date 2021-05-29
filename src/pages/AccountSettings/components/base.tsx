@@ -53,8 +53,15 @@ class BaseView extends Component<BaseViewProps> {
     this.view = ref;
   };
 
-  handleFinish = () => {
-    message.success(formatMessage({ id: 'accountsettings.basic.update.success' }));
+  handleFinish = (v) => {
+    console.log(v)
+    uploadUserInfo(v).then((r)=>{
+      if(r.success===true){
+        message.success(formatMessage({ id: 'accountsettings.basic.update.success' }));
+
+      }
+
+    })
   };
   handleChange = (info) => {
     if (info.file.status === 'uploading') {
@@ -106,7 +113,7 @@ class BaseView extends Component<BaseViewProps> {
               label={formatMessage({ id: 'accountsettings.basic.nickname' })}
               rules={[
                 {
-                  required: true,
+                  required: false,
                   message: formatMessage({ id: 'accountsettings.basic.nickname-message' }, {}),
                 },
               ]}
@@ -118,7 +125,7 @@ class BaseView extends Component<BaseViewProps> {
               label={formatMessage({ id: 'accountsettings.basic.profile' })}
               rules={[
                 {
-                  required: true,
+                  required: false,
                   message: formatMessage({ id: 'accountsettings.basic.profile-message' }, {}),
                 },
               ]}
@@ -133,7 +140,7 @@ class BaseView extends Component<BaseViewProps> {
               label={formatMessage({ id: 'accountsettings.basic.github' })}
               rules={[
                 {
-                  required: true,
+                  required: false,
                   pattern:
                     /^((ht|f)tps?):\/\/[\w\-]+(\.[\w\-]+)+([\w\-.,@?^=%&:\/~+#]*[\w\-@?^=%&\/~+#])?$/,
                   message: formatMessage({ id: 'accountsettings.basic.github-message' }, {}),
@@ -148,7 +155,7 @@ class BaseView extends Component<BaseViewProps> {
               label={formatMessage({ id: 'accountsettings.basic.website' })}
               rules={[
                 {
-                  required: true,
+                  required: false,
                   pattern:
                     /^((ht|f)tps?):\/\/[\w\-]+(\.[\w\-]+)+([\w\-.,@?^=%&:\/~+#]*[\w\-@?^=%&\/~+#])?$/,
                   message: formatMessage({ id: 'accountsettings.basic.website-message' }, {}),
@@ -205,15 +212,17 @@ class BaseView extends Component<BaseViewProps> {
           <Upload
             showUploadList={false}
             beforeUpload={beforeUpload}
-            method={'post'}
+            method={'POST'}
             onChange={this.handleChange}
             action="https://sm.ms/api/v2/upload"
             headers={{
+              'Access-Control-Allow-Origin':'*',
               'Content-Type': 'multipart/form-data',
-              Authorization: `rYraBpOP5l0Fz9rC2BoYsqfQToEiWWUp`,
+              "Authorization": `rYraBpOP5l0Fz9rC2BoYsqfQToEiWWUp`,
+             "Access-Control-Request-Method": "POST"
             }}
           >
-            {/* //todo 添加头像上传地址 */}
+            {/* //BUG  添加头像上传地址 */}
             <div className={styles.button_view}>
               <Button loading={loading}>
                 <UploadOutlined />

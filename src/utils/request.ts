@@ -73,6 +73,7 @@ request.interceptors.request.use(async (url, options) => {
     //如果有token 就走token逻辑
     let headers = {
       Authorization: `${token}`,
+      
     };
     return {
       url: url,
@@ -100,7 +101,7 @@ request.interceptors.response.use(async (response, options) => {
   if (
    
     (data === 2 && success === false) ||
-    (data === 5 && success === false)
+    (data === 5 && success === false) ||(message ==="解析token失败")
   ) {
     removeUserToken();
     return retry(response, options);

@@ -83,12 +83,7 @@ export default [
                 path: '/issuecode',
                 component: './Issue',
               },
-              {
-                name: '搜索列表（文章）',
-                icon: 'smile',
-                path: '/articlesforlist',
-                component: './ArticlesForList',
-              },
+              
               {
                 component: './404',
               },

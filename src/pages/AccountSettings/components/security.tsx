@@ -1,16 +1,9 @@
-/*
- * @Author: your name
- * @Date: 2021-05-16 22:27:37
- * @LastEditTime: 2021-05-23 22:20:08
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \HuiQue-Online-judge\src\pages\AccountSettings\components\security.tsx
- */
+
 import { FormattedMessage, formatMessage } from 'umi';
 import React, { Component } from 'react';
 import { FormInstance } from 'antd/lib/form';
-import { List, Modal, Form, Input, Button } from 'antd';
-
+import { List, Modal, Form, Input, Button, notification } from 'antd';
+import { changePassword } from '../service';
 type Unpacked<T> = T extends (infer U)[] ? U : T;
 const formItemLayout = {
   labelCol: {
@@ -97,6 +90,17 @@ class SecurityView extends Component<SecurityState> {
 
     const onFinish = (values: any) => {
       console.log('Received values of form: ', values);
+      changePassword(values).then((r) => {
+        console.log(r);
+        if(r.message==="ok"||r.success===true) {
+          notification.success({message:"修改密码成功  🤐"})
+          this.setState({
+            isModalVisible:false
+          })
+        }  else{
+          notification.error({message:r.message+"  🧐"})
+        }
+      });
     };
     return (
       <>
@@ -110,10 +114,11 @@ class SecurityView extends Component<SecurityState> {
           )}
         />
         <Modal
-          title="Basic Modal"
+          title="修改密码"
           visible={this.state.isModalVisible}
           onCancel={this.handleCancel}
           footer={[]}
+          destroyOnClose={true}
         >
           <Form
             {...formItemLayout}
@@ -173,7 +178,11 @@ class SecurityView extends Component<SecurityState> {
               <Input.Password />
             </Form.Item>
             <Form.Item {...tailFormItemLayout}>
-              <Button style={{ width: '130px' ,marginRight:"24px",marginBottom:"24px"}} type="primary" htmlType="submit">
+              <Button
+                style={{ width: '130px', marginRight: '24px', marginBottom: '24px' }}
+                type="primary"
+                htmlType="submit"
+              >
                 确认修改
               </Button>
 

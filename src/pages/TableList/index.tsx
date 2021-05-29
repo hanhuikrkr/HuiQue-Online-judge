@@ -109,6 +109,7 @@ export default () => {
     {
       title: '积分',
       dataIndex: 'point',
+      search: false,
       key: 'digit',
       valueType: 'digit',
       width: 80,
@@ -172,7 +173,7 @@ export default () => {
         pageSize: 5,
       }}
       dateFormatter="string"
-      headerTitle="高级表格"
+      headerTitle="题库列表"
       // toolBarRender={() => [
       //   <Button key="button" icon={<PlusOutlined />} type="primary">
       //     新建

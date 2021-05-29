@@ -14,10 +14,16 @@
  * @Description: In User Settings Edit
  * @FilePath: \HuiQue-Online-judge\src\pages\AccountSettings\service.ts
  */
+var removePropertyOfNull = function (obj) {
+  Object.keys(obj).forEach((item) => {
+    if (!obj[item]) delete obj[item];
+  });
+  return obj;
+};
 import request from '@/utils/request';
 import { API_SERVER, PIC_SERVER } from '@/constant/api';
 export async function queryCurrent() {
-  console.log("12 accountSettings service.ts")
+  console.log('12 accountSettings service.ts');
   // return request('/api/currentUser');
   return request(`${API_SERVER}/user/info`);
 }
@@ -34,12 +40,31 @@ export async function query() {
 }
 
 export async function uploadUserInfo(params) {
-  return request(`${API_SERVER}/user/info`), {
+  let p = removePropertyOfNull(params);
+  return request(`${API_SERVER}/user/info?`, {
     method: 'PUT',
+    params: p,
+  });
+}
 
-    params: params
-
-  }
+export async function changePassword(params) {
+  return request(`${API_SERVER}/user/password?`, {
+    method: 'POST',
+    params: params,
+  });
 }
 
 
+export async function queryMessage(params) {
+  return request(`${API_SERVER}/message`,{
+    params: params
+  })
+}
+
+export async function oneStepToReadAll() {
+  return request(`${API_SERVER}/message/read`,{method: 'PUT'})
+}
+
+export async function deleteMessage(){
+  return request(`${API_SERVER}/message`,{method:'delete'})
+}
