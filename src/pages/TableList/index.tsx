@@ -32,7 +32,7 @@ export default () => {
   const actionRef = useRef<ActionType>();
   const [tagList, setTagList] = useState<Array<any>>([]);
   useEffect(() => {
-    setTagList(JSON.parse(localStorage.getItem('huique_oj_taglist')));
+    setTagList(JSON.parse(localStorage.getItem('huique_oj_taglist'))||"");
   }, []);
   const columns: ProColumns<IssueItem>[] = [
     {
@@ -130,7 +130,10 @@ export default () => {
           searchVal:params.name
         });
         let taglist = await queryTagList();
-        localStorage.setItem('huique_oj_taglist', JSON.stringify(taglist.data));
+        console.log(taglist)
+        if(taglist.data){
+          localStorage.setItem('huique_oj_taglist', JSON.stringify(taglist.data||""));
+        }
         // console.log(res, taglist);
         let data = res.data.data.map((oldData) => {
           let oldtags = JSON.parse(oldData.tags);

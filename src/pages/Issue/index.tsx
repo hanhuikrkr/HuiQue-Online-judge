@@ -48,7 +48,7 @@ export default (props: any) => {
       setIssues(r.data);
     });
 
-    setTagList(JSON.parse(localStorage.getItem('huique_oj_taglist')));
+    setTagList(JSON.parse(localStorage.getItem('huique_oj_taglist')||""));
   }, []);
   const onTabChange = (value) => {
     console.log('you click tabs with value', value);

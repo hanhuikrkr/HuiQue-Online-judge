@@ -30,6 +30,20 @@ const codeMessage: Record<number, string> = {
   504: '网关超时。',
 };
 
+const retry = (response, options) => {
+  return request(response.url, options);
+};
+const getUserToken = () => {
+  return localStorage.getItem('huique_oj_changeLoginStatus_accessT');
+};
+const getUserRefreshToken = () => {
+  return localStorage.getItem('huique_oj_changeLoginStatus_refreshT');
+};
+const removeUserToken = () => {
+  localStorage.removeItem('huique_oj_changeLoginStatus_accessT');
+  localStorage.removeItem('huique_oj_changeLoginStatus_refreshT');
+};
+
 /**
  * @zh-CN 异常处理程序
  * @en-US Exception handler
@@ -73,7 +87,6 @@ request.interceptors.request.use(async (url, options) => {
     //如果有token 就走token逻辑
     let headers = {
       Authorization: `${token}`,
-    
     };
     return {
       url: url,
@@ -99,9 +112,9 @@ request.interceptors.response.use(async (response, options) => {
     return retry(response, options);
   }
   if (
-   
     (data === 2 && success === false) ||
-    (data === 5 && success === false) ||(message ==="解析token失败")
+    (data === 5 && success === false) ||
+    message === '解析token失败' 
   ) {
     removeUserToken();
     return retry(response, options);
@@ -115,17 +128,4 @@ request.interceptors.response.use(async (response, options) => {
   return response;
 });
 
-const retry = (response, options) => {
-  return request(response.url, options);
-};
-const getUserToken = () => {
-  return localStorage.getItem('huique_oj_changeLoginStatus_accessT');
-};
-const getUserRefreshToken = () => {
-  return localStorage.getItem('huique_oj_changeLoginStatus_refreshT');
-};
-const removeUserToken = () => {
-  localStorage.removeItem('huique_oj_changeLoginStatus_accessT');
-  localStorage.removeItem('huique_oj_changeLoginStatus_refreshT')
-};
 export default request;
