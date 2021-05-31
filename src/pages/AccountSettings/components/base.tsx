@@ -54,14 +54,12 @@ class BaseView extends Component<BaseViewProps> {
   };
 
   handleFinish = (v) => {
-    console.log(v)
-    uploadUserInfo(v).then((r)=>{
-      if(r.success===true){
+    console.log(v);
+    uploadUserInfo(v).then((r) => {
+      if (r.success === true) {
         message.success(formatMessage({ id: 'accountsettings.basic.update.success' }));
-
       }
-
-    })
+    });
   };
   handleChange = (info) => {
     if (info.file.status === 'uploading') {
@@ -210,16 +208,15 @@ class BaseView extends Component<BaseViewProps> {
             {loading ? <LoadingOutlined /> : <img src={this.state.imgUrl} alt="avatar" />}
           </div>
           <Upload
+            name="smfile"
             showUploadList={false}
             beforeUpload={beforeUpload}
             method={'POST'}
             onChange={this.handleChange}
             action="https://sm.ms/api/v2/upload"
             headers={{
-              'Access-Control-Allow-Origin':'*',
               'Content-Type': 'multipart/form-data',
               "Authorization": `rYraBpOP5l0Fz9rC2BoYsqfQToEiWWUp`,
-             "Access-Control-Request-Method": "POST"
             }}
           >
             {/* //BUG  添加头像上传地址 */}

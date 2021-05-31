@@ -90,17 +90,18 @@ const columns = [
   { title: '提交时间', key: 'time', dataIndex: 'time', valueType: 'dateTime' },
 ];
 
-function PostCodeHistory(issues) {
+function PostCodeHistory({issues}) {
   return (
     <ProTable<MeesageItem>
       columns={columns}
       bordered={false}
       request={async (params) => {
-        console.log(params);
+        console.log("issues",issues);
         let res = await queryIssueHistory({
           pageNumber: params.current - 1,
           pageSize: params.pageSize,
           hasCount: true,
+          pid:issues.id,
         });
         console.log(res.data.data);
         return {
@@ -113,6 +114,7 @@ function PostCodeHistory(issues) {
       search={false}
       showHeader={false}
       pagination={{
+        pageSizeOptions:["5","10","20","50","100"],
         pageSize: 5,
       }}
       dateFormatter="string"

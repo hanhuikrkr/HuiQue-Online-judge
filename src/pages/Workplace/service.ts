@@ -7,7 +7,7 @@
  * @FilePath: \HuiQue-Online-judge\src\pages\Workplace\service.ts
  */
 import request from '@/utils/request';
-
+import {API_SERVER} from '@/constant/api'
 // TODO: 改为收藏夹
 export async function queryProjectNotice() {
   return request('/api/project/notice');
@@ -22,5 +22,5 @@ export async function fakeChartData() {
 }
 
 export async function queryCurrent() {
-  return request('https://ssacgn.online/hqoj/user/info');
+  return request(`${API_SERVER}/user/info`);
 }

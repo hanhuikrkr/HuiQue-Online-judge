@@ -107,7 +107,7 @@ function IssueDetail({ tab = 1, issue = { description: '' } }) {
   return (
     <DraggleLayout
       containerWidth={window.innerWidth - 48}
-      containerHeight={window.innerHeight * 0.7}
+      containerHeight={window.innerHeight * 0.64}
       min={window.innerWidth / 5}
       max={window.innerWidth / 1.5}
       initLeftWidth={window.innerWidth / 2}

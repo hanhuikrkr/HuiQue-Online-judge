@@ -29,10 +29,10 @@ export default (props: any) => {
     like: '',
     timeLimit: 0,
     spaceLimit: 0,
-    point:0,
+    point: 0,
   });
   const [tagList, setTagList] = useState([]);
-  const [tab,setTab]= useState(1)
+  const [tab, setTab] = useState(1);
   useEffect(() => {
     queryIssueDetails({ id: props.location.query.id }).then((r) => {
       console.log('issue detail page=====>');
@@ -50,13 +50,13 @@ export default (props: any) => {
 
     setTagList(JSON.parse(localStorage.getItem('huique_oj_taglist')));
   }, []);
-  const onTabChange=(value)=>{
-    console.log("you click tabs with value",value);
+  const onTabChange = (value) => {
+    console.log('you click tabs with value', value);
     setTab(value);
-  }
+  };
   return (
     <PageContainer
-    className={styles.main}
+      className={styles.main}
       fixedHeader
       header={{
         title: issues.name,
@@ -75,13 +75,23 @@ export default (props: any) => {
           </Space>
 
           <span style={{ marginLeft: '10%' }}>
-            积分：<span style={{ color:"grey" ,fontFamily:"system-ui"}}>{issues.point}</span>
+            积分：<span style={{ color: 'grey', fontFamily: 'system-ui' }}>{issues.point}</span>
           </span>
           <span style={{ marginLeft: '10%' }}>
-            运行限时：<span style={{ color:"grey" ,fontFamily:"system-ui"}}>{(issues.timeLimit/1000)>=1?issues.timeLimit/1000+" s":issues.timeLimit+" ms"} </span>
+            运行限时：
+            <span style={{ color: 'grey', fontFamily: 'system-ui' }}>
+              {issues.timeLimit / 1000 >= 1
+                ? issues.timeLimit / 1000 + ' s'
+                : issues.timeLimit + ' ms'}{' '}
+            </span>
           </span>
           <span style={{ marginLeft: '10%' }}>
-            空间限制：<span style={{ color:"grey" ,fontFamily:"system-ui"}}>{(issues.spaceLimit/1000)>=0.1?issues.spaceLimit/1000/1000+" MB":issues.spaceLimit/1000+" KB"} </span>
+            空间限制：
+            <span style={{ color: 'grey', fontFamily: 'system-ui' }}>
+              {issues.spaceLimit / 1000 >= 0.1
+                ? issues.spaceLimit / 1000 / 1000 + ' MB'
+                : issues.spaceLimit / 1000 + ' KB'}{' '}
+            </span>
           </span>
         </>
       }
@@ -100,10 +110,10 @@ export default (props: any) => {
         },
       ]}
       onTabChange={onTabChange}
-
     >
-      <IssueDetail tab={tab} issue={issues}/>
-      
+      <div className={styles.detail_container}>
+        <IssueDetail tab={tab} issue={issues} />
+      </div>
     </PageContainer>
   );
 };

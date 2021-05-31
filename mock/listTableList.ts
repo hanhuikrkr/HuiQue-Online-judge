@@ -158,6 +158,7 @@ function postRule(req: Request, res: Response, u: string, b: Request) {
   const result = {
     list: tableListDataSource,
     pagination: {
+      pageSizeOptions:["5","10","20","50","100"],
       total: tableListDataSource.length,
     },
   };

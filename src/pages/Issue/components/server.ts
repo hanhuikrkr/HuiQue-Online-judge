@@ -11,9 +11,11 @@ export async function putCodeRecord(params:{pid:Number,Code:String,languageType:
 
 }
 
-export async function getRecordStateByID(params:{id:Number}){
+export async function getRecordStateByID(params){
     return request(`${API_SERVER}/record/state`,{
         method:"GET",
-        params:params
+        params:{
+            id:params
+        }
     })
 }

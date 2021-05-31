@@ -127,6 +127,7 @@ export default () => {
           pageSize: params.pageSize,
           level: params.level,
           tags: params.tags,
+          searchVal:params.name
         });
         let taglist = await queryTagList();
         localStorage.setItem('huique_oj_taglist', JSON.stringify(taglist.data));
@@ -170,6 +171,7 @@ export default () => {
         },
       }}
       pagination={{
+        pageSizeOptions:["5","10","20","50","100"],
         pageSize: 5,
       }}
       dateFormatter="string"

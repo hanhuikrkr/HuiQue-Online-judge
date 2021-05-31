@@ -7,7 +7,7 @@
  * @FilePath: \HuiQue-Online-judge\src\services\login.ts
  */
 import request from '@/utils/request';
-
+import {API_SERVER} from '@/constant/api'
 export type LoginParamsType = {
   userName: string;
   password: string;
@@ -25,13 +25,13 @@ export async function fakeAccountLogin(params: LoginParamsType) {
 
   if (params.type === 'email') {
     let { email, captcha } = params;
-    return request(`https://ssacgn.online/hqoj/user/login/code?code=${captcha}&email=${email}`, {
+    return request(`${API_SERVER}/user/login/code?code=${captcha}&email=${email}`, {
       method: 'POST'
     });
   }
   if (params.type === 'account') {
     let { userName, password } = params;
-    return request(`https://ssacgn.online/hqoj/user/login/password?email=${userName}&password=${password}`, {
+    return request(`${API_SERVER}/user/login/password?email=${userName}&password=${password}`, {
       method: 'POST'
     });
   }
@@ -40,7 +40,7 @@ export async function fakeAccountLogin(params: LoginParamsType) {
 
 export async function getFakeCaptcha(email: string) {
   console.log(email);
-  return request(`https://ssacgn.online/hqoj/verify/email?email=${email}`, {
+  return request(`${API_SERVER}/verify/email?email=${email}`, {
     method: 'put',
 
   });

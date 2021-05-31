@@ -6,6 +6,7 @@ export async function queryIssueDetails(params:{id:number}){
 }
 
 export async function queryIssueHistory(params){
+    console.log(params)
     return request(`${API_SERVER}/record`,{
         method:"GET",
         params:params

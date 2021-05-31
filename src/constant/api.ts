@@ -8,9 +8,11 @@
  */
 // var API_SERVER = 'http://localhost:8090'
 // var API_SERVER = 'http://www.straightwood.art:3002'
-var LOCAL_SERVER = 'http://localhost:8018'
-var API_SERVER = 'https://ssacgn.online/hqoj'
+//var LOCAL_SERVER = 'http://localhost:8018'
+var LOCAL_SERVER = 'http://192.168.1.101:8989/hqoj'
 var PIC_SERVER = 'https://sm.ms/api/v2/'
+var API_SERVER = 'https://ssacgn.online/hqoj'
+// var API_SERVER =LOCAL_SERVER
 
 // var API_SERVER = 'https://webmooc.online'
 

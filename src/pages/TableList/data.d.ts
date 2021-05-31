@@ -22,9 +22,9 @@ export type TableListItem = {
 };
 
 export type TableListPagination = {
-  lastId: number;//(入参)上一页最后一项的id，如果这个参数>0，则pageNumber失效
-  pageSize: number;// (入参)每页大小
-  pageNumber: number;//(入参)第几页
+  lastId: number; //(入参)上一页最后一项的id，如果这个参数>0，则pageNumber失效
+  pageSize: number; // (入参)每页大小
+  pageNumber: number; //(入参)第几页
 };
 
 export type TableListData = {
@@ -33,9 +33,10 @@ export type TableListData = {
 };
 // todo:修改题目列表读取类型
 export type TableListParams = {
-  level?: "EASY"|"MEDIUM"|"HARD"|"all";
-  lastId?: number;//(入参)上一页最后一项的id，如果这个参数>0，则pageNumber失效
-  pageSize?: number;// (入参)每页大小
-  pageNumber?: number;//(入参)第几页
-  tags?:Array<Number>;
+  level?: 'EASY' | 'MEDIUM' | 'HARD' | 'all';
+  lastId?: number; //(入参)上一页最后一项的id，如果这个参数>0，则pageNumber失效
+  pageSize?: number; // (入参)每页大小
+  pageNumber?: number; //(入参)第几页
+  tags?: Array<Number>;
+  searchVal?: string;
 };

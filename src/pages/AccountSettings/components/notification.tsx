@@ -109,6 +109,7 @@ function NotificationView() {
       search={false}
       showHeader={false}
       pagination={{
+        pageSizeOptions:["5","10","20","50","100"],
         pageSize: 5,
       }}
       dateFormatter="string"

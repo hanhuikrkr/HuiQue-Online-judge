@@ -183,7 +183,7 @@ const ArticlesForList: FC<ArticlesForListProps> = (props) => {
         </Form>
       </Card>
       <Card
-        style={{ marginTop: 24 }}
+      
         bordered={false}
         bodyStyle={{ padding: '8px 32px 32px 32px' }}
       >

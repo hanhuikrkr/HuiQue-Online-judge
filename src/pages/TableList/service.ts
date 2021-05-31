@@ -22,6 +22,7 @@ export async function queryProblemList(params: TableListParams) {
       pageSize:pageSize,
       tags:tags,
       totalCount:0,
+      searchVal:params.searchVal
     }
   });
 }
