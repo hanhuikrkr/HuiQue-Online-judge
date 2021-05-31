@@ -204,6 +204,7 @@ const ArticlesForList: FC<ArticlesForListProps> = (props) => {
               ]}
             >
               <List.Item.Meta
+              // todo add article id
                 title={<a className={styles.listItemMetaTitle}>{item.title}</a>}
                 description={<span>{tagWithColor(item.tags)}</span>}
               />
