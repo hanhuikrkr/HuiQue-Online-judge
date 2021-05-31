@@ -205,7 +205,7 @@ const ArticlesForList: FC<ArticlesForListProps> = (props) => {
             >
               <List.Item.Meta
               //TODO: add article id
-                title={<Link to={{pathname:"/articledetail",search:`?id=${item.id}`}} className={styles.listItemMetaTitle}>{item.title}</Link>}
+                title={<Link target = "_blank"  to={{pathname:"/articledetail",search:`?id=${item.id}`}} className={styles.listItemMetaTitle}>{item.title}</Link>}
                 description={<span>{tagWithColor(item.tags)}</span>}
               />
               <ArticleListContent data={item} />

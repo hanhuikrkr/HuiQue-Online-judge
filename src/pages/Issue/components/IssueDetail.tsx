@@ -69,6 +69,8 @@ const options = (language) => {
 
 function IssueDetail({ tab = 1, issue = { description: '' } }) {
   const [language, setLanguage] = useState('CPP');
+  const[pageState,setpageState] = useState(0)
+  // INFO: 0=>coding 1 =>uploadDoc 2 =>result
   const handleLanguage = (value) => {
     setCodevalue(def_code[value]);
     setLanguage(value);
