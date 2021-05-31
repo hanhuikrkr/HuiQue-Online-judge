@@ -5,11 +5,9 @@ import styles from './index.less';
 
 type ArticleListContentProps = {
   data: {
-    content: React.ReactNode;
-    updatedAt: number;
-    avatar: string;
-    owner: string;
-    href: string;
+    time: number;
+    userNickName: string;
+    summary:string
   };
 };
 

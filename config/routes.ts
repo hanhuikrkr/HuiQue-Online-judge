@@ -83,8 +83,6 @@ export default [
                 component: './Issue',
               },
               {
-                name: '空白页面',
-                icon: 'smile',
                 path: '/articledetail',
                 component: './ArticleDetail/ArticleDetail',
               },

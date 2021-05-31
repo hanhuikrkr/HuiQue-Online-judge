@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import React, { useEffect } from 'react';
 import { Button, Card, Col, Form, List, Row, Select, Tag } from 'antd';
 import { LoadingOutlined, StarOutlined, LikeOutlined, MessageOutlined } from '@ant-design/icons';
-import type { Dispatch } from 'umi';
+import { Dispatch, Link } from 'umi';
 import { connect } from 'umi';
 import ArticleListContent from './components/ArticleListContent';
 import type { StateType } from './model';
@@ -204,8 +204,8 @@ const ArticlesForList: FC<ArticlesForListProps> = (props) => {
               ]}
             >
               <List.Item.Meta
-              // todo add article id
-                title={<a className={styles.listItemMetaTitle}>{item.title}</a>}
+              //TODO: add article id
+                title={<Link to={{pathname:"/articledetail",search:`?id=${item.id}`}} className={styles.listItemMetaTitle}>{item.title}</Link>}
                 description={<span>{tagWithColor(item.tags)}</span>}
               />
               <ArticleListContent data={item} />

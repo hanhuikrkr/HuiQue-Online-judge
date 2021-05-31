@@ -148,7 +148,7 @@ function IssueDetail({ tab = 1, issue = { description: '' } }) {
               onClick={() => submitCode({ pid: issue.id, code: codevalue, languageType: language })}
             >
               {' '}
-              {isLogin ? '提交' : '请先登入'}
+              {isLogin ? '提交' : '请先登录'}
             </Button>
           </Space>
           <CodeMirror
