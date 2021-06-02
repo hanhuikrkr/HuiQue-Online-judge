@@ -12,8 +12,8 @@ export default () => {
   },[])
   return (
     <div className={styles.dailyComponent}>
-        <h3>
-  🏆{" "}每日一题
+        <h3 style={{ paddingLeft:"12px"}}>
+  {" "}🏆{" "}每日一题
         </h3>
       <Calendar fullscreen={false} onPanelChange={onPanelChange}      headerRender={({ value, type, onChange, onTypeChange }) => {
      

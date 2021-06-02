@@ -191,7 +191,7 @@ export default () => {
             }}
             pagination={{
               pageSizeOptions: ['5', '10', '20', '50', '100'],
-              pageSize: 5,
+              pageSize: 10,
             }}
             dateFormatter="string"
             headerTitle="题库列表"
@@ -207,8 +207,7 @@ export default () => {
             // ]}
           />
         </Content>
-        <Sider width={'30%'} style={{ backgroundColor: '#00000000' }}>
-        
+        <Sider width={'30%'} style={{ backgroundColor: '#FFFFFF', marginLeft: '24px',padding:"12px" }}>
           <Row>
             <Col>
               <DailyIssue />
@@ -221,12 +220,14 @@ export default () => {
           </Row>
           <Row>
             <Col>
-          <h3>🔥{" "}热题榜</h3>
+            <h3 style={{ paddingLeft:"12px"}}>
+{" "}🔥 热题榜</h3>
             </Col>
           </Row>
           <Row>
             <Col>
               <ProTable
+                style={{ borderTop: '1px solid #f0f0f0', marginTop: '16px' }}
                 columns={hotColumns}
                 bordered={false}
                 request={async () => {

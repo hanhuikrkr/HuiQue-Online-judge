@@ -1,7 +1,7 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Card, Drawer, List, Typography } from 'antd';
 import React, { Component } from 'react';
-
+import FavoriteList from '@/components/FavoriteList/index'
 import { PageContainer } from '@ant-design/pro-layout';
 import type { Dispatch } from 'umi';
 import { connect } from 'umi';
@@ -18,12 +18,13 @@ type FavoriteProps = {
 };
 type FavoriteState = {
   visible: boolean;
-  done?: boolean;
+  itemid: number;
+  drawerName:string;
   current?: Partial<CardListItemDataType>;
 };
 
 class Favorite extends Component<FavoriteProps, FavoriteState> {
-  state = { visible: false };
+  state = { visible: false ,itemid: 0 ,drawerName:""};
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
@@ -33,10 +34,12 @@ class Favorite extends Component<FavoriteProps, FavoriteState> {
       },
     });
   }
-  
-  showDrawer = () => {
+
+  showDrawer = (item) => {
     this.setState({
       visible: true,
+      itemid:item.id,
+      drawerName:item.name
     });
   };
 
@@ -93,7 +96,12 @@ class Favorite extends Component<FavoriteProps, FavoriteState> {
                     <Card
                       hoverable
                       className={styles.card}
-                      actions={[<a key="option1" onClick={this.showDrawer}>展开</a>, <a key="option2">编辑</a>]}
+                      actions={[
+                        <a key="option1" onClick={()=>{this.showDrawer(item)}}>
+                          展开
+                        </a>,
+                        <a key="option2">编辑</a>,
+                      ]}
                     >
                       <Card.Meta
                         title={<a>{item.size} 项收藏</a>}
@@ -104,7 +112,6 @@ class Favorite extends Component<FavoriteProps, FavoriteState> {
                           </Paragraph>
                         }
                       />
-                    
                     </Card>
                   </List.Item>
                 );
@@ -120,15 +127,15 @@ class Favorite extends Component<FavoriteProps, FavoriteState> {
           />
         </div>
         <Drawer
-                        title="Basic Drawer"
-                        placement="right"
-                        closable={false}
-                        onClose={this.onClose}
-                        visible={this.state.visible}
-                        style={{ position: 'absolute' }}
-                      >
-                        <p>Some contents...</p>
-                      </Drawer>
+          title={this.state.drawerName}
+          placement="right"
+          closable={false}
+          onClose={this.onClose}
+          visible={this.state.visible}
+          style={{ position: 'absolute' }}
+        >
+          <FavoriteList favoriteId={this.state.itemid}/>
+        </Drawer>
       </PageContainer>
     );
   }
