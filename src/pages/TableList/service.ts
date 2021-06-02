@@ -50,3 +50,7 @@ export async function addRule(params: TableListItem) {
 export async function queryTagList(): Promise<any>{
   return request(`${API_SERVER}/tag/all`);
 }
+
+export async function queryHotList(): Promise<any>{
+  return request(`${API_SERVER}/problem/hot`);
+}

@@ -5,7 +5,7 @@ export async function putCodeRecord(params:{pid:Number,Code:String,languageType:
     
     return request(`${API_SERVER}/record`,{
         method:"PUT",
-        params:params,
+        data:params,
       
     })
 

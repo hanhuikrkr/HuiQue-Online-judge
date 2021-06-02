@@ -87,8 +87,7 @@ export default [
                 component: './ArticleDetail/ArticleDetail',
               },
               {
-                name: '空白页面',
-                icon: 'smile',
+              
                 path: '/uploaddoc',
                 component: './UploadDoc',
               },

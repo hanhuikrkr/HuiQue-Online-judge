@@ -14,7 +14,7 @@ import { colors_antd } from '@/constant/data';
 const { Option } = Select;
 const FormItem = Form.Item;
 
-let pageSize = 5;
+let pageSize = 1;
 
 type ArticlesForListProps = {
   dispatch: Dispatch;
@@ -50,8 +50,9 @@ const ArticlesForList: FC<ArticlesForListProps> = (props) => {
     dispatch({
       type: 'articlesForList/appendFetch',
       payload: {
-        lastId: pageSize,
-        pageSize: (pageSize = pageSize + 5),
+        lastId: pageSize=pageSize+5,
+        pageSize: 5,
+        problemId: issues.id,
       },
     });
   };
@@ -59,23 +60,23 @@ const ArticlesForList: FC<ArticlesForListProps> = (props) => {
   const owners = [
     {
       id: 'wzj',
-      name: '我自己',
+      name: '蓝',
     },
     {
       id: 'wjh',
-      name: '吴家豪',
+      name: '李',
     },
     {
       id: 'zxx',
-      name: '周星星',
+      name: '韩',
     },
     {
       id: 'zly',
-      name: '赵丽颖',
+      name: '王',
     },
     {
       id: 'ym',
-      name: '姚明',
+      name: '叶',
     },
   ];
 
@@ -204,7 +205,7 @@ const ArticlesForList: FC<ArticlesForListProps> = (props) => {
               ]}
             >
               <List.Item.Meta
-              //TODO: add article id
+              
                 title={<Link target = "_blank"  to={{pathname:"/articledetail",search:`?id=${item.id}`}} className={styles.listItemMetaTitle}>{item.title}</Link>}
                 description={<span>{tagWithColor(item.tags)}</span>}
               />

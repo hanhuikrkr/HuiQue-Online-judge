@@ -1,5 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, Card, List, Typography } from 'antd';
+import { Button, Card, Drawer, List, Typography } from 'antd';
 import React, { Component } from 'react';
 
 import { PageContainer } from '@ant-design/pro-layout';
@@ -18,14 +18,12 @@ type FavoriteProps = {
 };
 type FavoriteState = {
   visible: boolean;
-  done: boolean;
+  done?: boolean;
   current?: Partial<CardListItemDataType>;
 };
 
-class Favorite extends Component<
-  FavoriteProps,
-  FavoriteState
-> {
+class Favorite extends Component<FavoriteProps, FavoriteState> {
+  state = { visible: false };
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
@@ -35,7 +33,18 @@ class Favorite extends Component<
       },
     });
   }
+  
+  showDrawer = () => {
+    this.setState({
+      visible: true,
+    });
+  };
 
+  onClose = () => {
+    this.setState({
+      visible: false,
+    });
+  };
   render() {
     const {
       favorite: { list },
@@ -49,7 +58,6 @@ class Favorite extends Component<
           <br></br>
           浏览时点击收藏，就会在这里显示哦
         </p>
-
       </div>
     );
 
@@ -85,17 +93,18 @@ class Favorite extends Component<
                     <Card
                       hoverable
                       className={styles.card}
-                      actions={[<a key="option1">展开</a>, <a key="option2">编辑</a>]}
+                      actions={[<a key="option1" onClick={this.showDrawer}>展开</a>, <a key="option2">编辑</a>]}
                     >
                       <Card.Meta
-
-                        title={<a>{item.title}</a>}
+                        title={<a>{item.size} 项收藏</a>}
                         description={
-                          <Paragraph className={styles.item} ellipsis={{ rows: 3 }}>
-                            {item.description}
+                          <Paragraph className={styles.item} ellipsis={{ rows: 2 }}>
+                            {'\n'}
+                            {item.name}
                           </Paragraph>
                         }
                       />
+                    
                     </Card>
                   </List.Item>
                 );
@@ -110,6 +119,16 @@ class Favorite extends Component<
             }}
           />
         </div>
+        <Drawer
+                        title="Basic Drawer"
+                        placement="right"
+                        closable={false}
+                        onClose={this.onClose}
+                        visible={this.state.visible}
+                        style={{ position: 'absolute' }}
+                      >
+                        <p>Some contents...</p>
+                      </Drawer>
       </PageContainer>
     );
   }

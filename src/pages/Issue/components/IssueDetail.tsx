@@ -6,10 +6,12 @@ import DraggleLayout from './DraggleLayout';
 import { LanguageSelect } from '@/components/LanguageSelect/index';
 import MarkdownArea from '@/components/Markdowm/index';
 import { Controlled as CodeMirror } from 'react-codemirror2';
-import { Button, Col, Row, Space, notification } from 'antd';
+import { Button, Col, Row, Space, notification, Result, Typography, PageHeader } from 'antd';
 import { putCodeRecord, getRecordStateByID } from './server';
 import PostCodeHistory from '../IssueHistory/index';
 import ArticlesForList from '@/pages/ArticlesForList/index';
+import { CloseCircleOutlined } from '@ant-design/icons';
+import UploadDoc from '@/pages/UploadDoc/index';
 
 //  import blow are all for codemirror as you can see
 import 'codemirror/lib/codemirror.css';
@@ -31,6 +33,7 @@ import 'codemirror/addon/edit/closebrackets';
 import 'codemirror/addon/edit/matchbrackets';
 import { useEffect } from 'react';
 
+const { Paragraph, Text } = Typography;
 const mode = { PYTHON: 'text/x-python', CPP: 'text/x-c++src', JAVA: 'text/x-java' };
 const options = (language) => {
   return {
@@ -69,13 +72,24 @@ const options = (language) => {
 
 function IssueDetail({ tab = 1, issue = { description: '' } }) {
   const [language, setLanguage] = useState('CPP');
-  const[pageState,setpageState] = useState(0)
-  // INFO: 0=>coding 1 =>uploadDoc 2 =>result
+  const [pageState, setpageState] = useState(0);
+  // INFO: 0=>coding 1 =>uploadDoc 2 =>result.success 3=>result.failure
+
+  const [codevalue, setCodevalue] = useState('');
+
+  const onDocSubmit = (val) => {
+    setpageState(val);
+  };
+  const backTocoding = () => {
+    setpageState(0);
+  };
+  const uploadDoc = () => {
+    setpageState(1);
+  };
   const handleLanguage = (value) => {
     setCodevalue(def_code[value]);
     setLanguage(value);
   };
-  const [codevalue, setCodevalue] = useState('');
   const submitCode = (v) => {
     putCodeRecord(v).then((r) => {
       if (r.success === true && r.data) {
@@ -141,27 +155,82 @@ function IssueDetail({ tab = 1, issue = { description: '' } }) {
           overflowY: 'scroll',
         }}
       >
-        <div>
-          <Space size={[60, 60]}>
-            <LanguageSelect handleChange={handleLanguage} defaultvalue={'C/C++'} />
-            <Button
-              disabled={!isLogin}
-              type="primary"
-              onClick={() => submitCode({ pid: issue.id, code: codevalue, languageType: language })}
-            >
-              {' '}
-              {isLogin ? '提交' : '请先登录'}
-            </Button>
-          </Space>
-          <CodeMirror
-            value={codevalue}
-            options={options(language)}
-            onBeforeChange={(editor, data, value) => {
-              setCodevalue(value);
-            }}
-            onChange={(editor, data, value) => {}}
-          />
-        </div>
+        {pageState === 0 && (
+          <div>
+            <Space size={[60, 60]}>
+              <LanguageSelect handleChange={handleLanguage} defaultvalue={'C/C++'} />
+              <Button
+                disabled={!isLogin}
+                type="primary"
+                onClick={() =>
+                  submitCode({ pid: issue.id, code: codevalue, languageType: language })
+                }
+              >
+                {' '}
+                {isLogin ? '提交' : '请先登录'}
+              </Button>
+              {isLogin && (
+                <Button type="default" onClick={uploadDoc}>
+                  {' '}
+                  上传题解
+                </Button>
+              )}
+            </Space>
+            <CodeMirror
+              value={codevalue}
+              options={options(language)}
+              onBeforeChange={(editor, data, value) => {
+                setCodevalue(value);
+              }}
+              onChange={(editor, data, value) => {}}
+            />
+          </div>
+        )}
+        {pageState === 1 && (
+          <div>
+            {/* TODO put upload component here! */}
+            <UploadDoc submit={onDocSubmit} issue={issue} />
+          </div>
+        )}
+        {pageState === 2 && (
+          <div>
+            <Result
+              status="success"
+              title="上传成功"
+              extra={
+                <Button type="primary" onClick={backTocoding}>
+                  返回
+                </Button>
+              }
+            ></Result>
+          </div>
+        )}
+        {pageState === 3 && (
+          <div>
+            <Result status="error" title="题解上传失败" subTitle="请确认网络是否连接">
+              <div className="desc">
+                <Paragraph>
+                  <Text
+                    strong
+                    style={{
+                      fontSize: 16,
+                    }}
+                  >
+                    不要慌张，我已经为您保存好已书写的内容
+                  </Text>
+                </Paragraph>
+                <Paragraph>
+                  <CloseCircleOutlined className="site-result-demo-error-icon" />{' '}
+                  请确认网络环境没有问题， <a onClick={uploadDoc}>返回再次编辑并重新上传 &gt;</a>
+                </Paragraph>
+                <Paragraph>
+                  <CloseCircleOutlined className="site-result-demo-error-icon" />{' '}
+                  不想再写了？ <a onClick={backTocoding}>返回编程页面 &gt;</a>
+                </Paragraph>
+              </div>{' '}
+            </Result>
+          </div>
+        )}
       </div>
     </DraggleLayout>
   );
